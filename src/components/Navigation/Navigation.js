@@ -4,7 +4,7 @@ import {StyledLink, Wrapper} from './Navigation.style'
 const Navigation = () => {
   return (
     <Wrapper>
-      <StyledLink to="./LogIn" activeClassName="active-link">
+      <StyledLink to="./LoginPanel" activeClassName="active-link">
         Main
       </StyledLink>
       <StyledLink to="./" activeClassName="active-link">

@@ -1,12 +1,11 @@
 import React from "react";
-import { Wrapper, Panel, Panel2 } from "./Login.style";
+import { Wrapper, Panel, Panel2 } from "./LoginPanel.style";
 import LoginSelect from "./LoginSelect/LoginSelect";
 import LoginRegistration from "./LoginRegistration/LoginRegistration";
 import LoginContact from "./LoginContact/LoginContact";
 import LoginPasswordReset from "./LoginPasswordReset/LoginPasswordReset";
 
-
-const LogIn = () => {
+const LoginPanel = () => {
   return (
     <Wrapper as="form">
       <Panel>
@@ -23,6 +22,6 @@ const LogIn = () => {
       </Panel2>
     </Wrapper>
   );
-}
+};
 
-export default LogIn;
+export default LoginPanel;

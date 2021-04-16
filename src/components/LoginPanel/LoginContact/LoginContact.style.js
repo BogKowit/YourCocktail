@@ -46,3 +46,12 @@ export const WrapperDiv = styled.div`
   width: 80%;
   justify-content: space-between;
 `;
+
+export const Text = styled.p`
+  width: 80%;
+  font-size: 12px;
+`
+export const Info = styled.p`
+  width: 80%;
+  font-size: 12px;
+`

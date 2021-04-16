@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-router-dom';
 import Admin from './Admin/Admin';
 import Board from './Board';
-import LogIn from './LogIn/Login';
+import LoginPanel from './LoginPanel/LoginPanel';
 import User from './User';
 import Navigation from './Navigation/Navigation'
 import { createGlobalStyle } from "styled-components";
@@ -45,7 +45,7 @@ const App = () => {
     <Router>
         <Navigation />
         <Switch>
-          <Route patch='/LogIn' ><LogIn /></Route>
+          <Route patch='/LoginPanel' ><LoginPanel /></Route>
           <Route patch='/' ><Admin /></Route>
           {/* <Route patch='/User' component={User}>Profil Użytkownika</Route> */}
           {/* <Route patch='/user' component={User}>Dane Użytkownika</Route> */}
