@@ -10,3 +10,4 @@ npm i prop-types
 npm i -D sass styled-components
 
 //sfokusować element a poprzez tab# UserDate
+//Zrobić wspólnee stlyle do panelu logowania

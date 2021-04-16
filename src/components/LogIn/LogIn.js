@@ -1,32 +1,27 @@
-import LoginSelectField from "./LoginSelectField.js/SelectField";
-import React from "react"
-import {Wrapper, Panel, LinkTo, ButtonSingIn, Welcome} from "./Login.style"
+import React from "react";
+import { Wrapper, Panel, Panel2 } from "./Login.style";
+import LoginSelect from "./LoginSelect/LoginSelect";
+import LoginRegistration from "./LoginRegistration/LoginRegistration";
+import LoginContact from "./LoginContact/LoginContact";
+import LoginPasswordReset from "./LoginPasswordReset/LoginPasswordReset";
 
 
 const LogIn = () => {
   return (
-    <>
-      <Wrapper as="form">
-        <Panel>
-          <Welcome> Witaj Użytkowniku</Welcome>
-          <LoginSelectField
-            type="text"
-            placeholder="Wprowadź nazwę"
-            value="name"
-            label="Nazwa:"
-          />
-          <LoginSelectField
-            type="password"
-            placeholder="Wprowadź hasło"
-            value="password"
-            label="Hasło:"
-          />
-          <ButtonSingIn>Zaloguj</ButtonSingIn>
-          <LinkTo>Zapomniałeś Hasła?</LinkTo>
-          <LinkTo>Skontaktuj się z nami.</LinkTo>
-        </Panel>
-      </Wrapper>
-    </>
+    <Wrapper as="form">
+      <Panel>
+        <LoginSelect />
+      </Panel>
+      <Panel2>
+        <LoginRegistration />
+      </Panel2>
+      <Panel2>
+        <LoginContact />
+      </Panel2>
+      <Panel2>
+        <LoginPasswordReset />
+      </Panel2>
+    </Wrapper>
   );
 }
 
