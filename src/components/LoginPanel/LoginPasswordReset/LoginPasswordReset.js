@@ -1,11 +1,13 @@
 import React from "react";
-import { WrapperDiv, LinkTo, Button, Welcome } from "./LoginPasswordReset.style";
+import {LinkTo, Button, Welcome } from "../../../assets/Login.style";
+import { Panel, Wrapper } from "../LoginPanel.style";
 import SelectField from "../SelectField/SelectField";
 
 const LoginPasswordReset = () => {
   return (
-    <>
-      <Welcome>Rejestracja hasła</Welcome>
+    <Wrapper>
+    <Panel>
+      <Welcome>Reset hasła</Welcome>
       <SelectField
         type="text"
         placeholder="Wprowadź nazwę"
@@ -20,9 +22,10 @@ const LoginPasswordReset = () => {
         label="Wpisz e-mail:"
       />
       <Button> Zmień Hasło </Button>
-      <LinkTo>Powrót do panelu Logowania</LinkTo>
-      <LinkTo>Skontaktuj się z nami!</LinkTo>
-    </>
+      <LinkTo to="login">Powrót do panelu Logowania</LinkTo>
+      <LinkTo to="contact">Skontaktuj się z nami!</LinkTo>
+    </Panel>
+    </Wrapper>
   );
 };
 

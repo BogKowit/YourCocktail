@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const LinkTo = styled.a`
+export const LinkTo = styled(Link)`
   text-decoration: none;
   color: #ddd;
   font-size: 12px;
   margin-top: 12px;
+  transition: all 0.3s ease-in-out;
+
   &:hover,
-  :hover {
-    text-shadow: 2px 2px 6px #00000040;
+  :focus {
+    text-shadow: 4px 4px 6px #ffffff80;
     cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
   }
 `;
 export const Button = styled.button`
@@ -29,7 +33,7 @@ export const Button = styled.button`
     background: rgba(255, 255, 255, 0.6);
     box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
     text-shadow: 2px 2px 6px #00000040;
-    color: black;
+    color: #00000095;
     outline: none;
   }
 `;
@@ -45,4 +49,15 @@ export const WrapperDiv = styled.div`
   display: flex;
   width: 80%;
   justify-content: space-between;
+`;
+
+export const Text = styled.p`
+  width: 80%;
+  font-size: 12px;
+  margin: 6px;
+  padding: 4px;
+`;
+export const Info = styled.p`
+  width: 80%;
+  font-size: 12px;
 `;

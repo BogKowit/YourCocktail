@@ -11,3 +11,4 @@ npm i -D sass styled-components
 
 //sfokusować element a poprzez tab# UserDate
 //Zrobić wspólnee stlyle do panelu logowania
+//Ostylować border Panel, Boerder input

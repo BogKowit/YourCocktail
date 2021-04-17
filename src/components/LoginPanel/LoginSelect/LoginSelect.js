@@ -1,5 +1,5 @@
 import React from 'react'
-import { WrapperDiv, LinkTo, Button, Welcome } from "./LoginSelect.style";
+import {WrapperDiv, LinkTo, Button, Welcome } from "../../../assets/Login.style";
 import SelectField from "../SelectField/SelectField";
 
 const LoginSelect = () => {
@@ -19,10 +19,10 @@ const LoginSelect = () => {
         label="Hasło:"
       />
       <Button>Zaloguj</Button>
-      <LinkTo>Zarejestruj użytkownika.</LinkTo>
+      <LinkTo to="/register">Zarejestruj użytkownika.</LinkTo>
       <WrapperDiv>
-        <LinkTo>Zapomniałeś Hasła?</LinkTo>
-        <LinkTo>Skontaktuj się z nami!</LinkTo>
+        <LinkTo to="/passwordReset">Zapomniałeś Hasła?</LinkTo>
+        <LinkTo to="/contact">Skontaktuj się z nami!</LinkTo>
       </WrapperDiv>
     </>
   );
