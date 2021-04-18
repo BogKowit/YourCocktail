@@ -5,6 +5,8 @@ import Navigation from './Navigation/Navigation'
 import LoginRegistration from './LoginPanel/LoginRegistration/LoginRegistration'
 import LoginPasswordReset from './LoginPanel/LoginPasswordReset/LoginPasswordReset';
 import LoginContact from './LoginPanel/LoginContact/LoginContact';
+import { DataUser } from '../data'
+console.log({DataUser});
 
 import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
@@ -17,10 +19,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+
+
 const NotFound = () => {
   return(
     <>
-      <h1>404 DUPA 404</h1>
+      <h1>404 DUPA!!! coś poszło nie tak!!! 404</h1>
     </>
   )
 }
@@ -28,7 +32,6 @@ const NotFound = () => {
 const App = () => {
 
   return(
-
     <Router>
       <GlobalStyle />
       <Navigation />
