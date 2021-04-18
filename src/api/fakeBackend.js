@@ -1,10 +1,9 @@
 import { DataUser } from '../data'
 
 function fakeBackend () {
-  window.fetch = function (url, options) {
-    
+  window.fetch = function(url, options) {    
     return new Promise((resolve, reject) => {
-      if (url.endsWith("/auth.login") && options.method === "POST") {
+      if (url.endsWith("/auth/login") && options.method === "POST") {
         const params = JSON.parse(options.body);
         const userFound = DataUser.filter(
           (user) =>
