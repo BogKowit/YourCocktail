@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import LoginPanel from './LoginPanel/LoginPanel';
 import Navigation from './Navigation/Navigation'
 import LoginRegistration from './LoginPanel/LoginRegistration/LoginRegistration'
 import LoginPasswordReset from './LoginPanel/LoginPasswordReset/LoginPasswordReset';
 import LoginContact from './LoginPanel/LoginContact/LoginContact';
-import { DataUser } from '../data'
-console.log({DataUser});
+import Home from '../conteners/Home/Home'
 
 import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
@@ -29,16 +28,19 @@ const NotFound = () => {
   )
 }
 
+export const UserContext = createContext(null);
+
 const App = () => {
+  const [user, setUser] = useState(localStorage.getItem('user'));
 
   return(
+    <UserContext.Provider value={{ user, setUser}}>
     <Router>
       <GlobalStyle />
       <Navigation />
         <Switch>
-          <Route exact path='/' >
-            <Redirect to='/login' />
-          </Route>
+          <Route exact path='/'><Redirect to={user ? '/home' : '/login'} /></Route>
+          <Route path='/home' ><Home /></Route>
           <Route path='/login' ><LoginPanel /></Route>
           <Route path='/register'><LoginRegistration /></Route>
           <Route path='/passwordReset'><LoginPasswordReset /></Route>
@@ -46,6 +48,7 @@ const App = () => {
           <Route path='*' component={NotFound} />
         </Switch>
     </Router>
+    </UserContext.Provider>
   )
 }
 

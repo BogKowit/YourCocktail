@@ -1,11 +1,11 @@
 import React from "react"
 import { Label, Input } from "./SelectField.style";
 
-const SelectField = ({ type, value, label, placeholder }) => {
+const SelectField = ({ type, value, label, placeholder, onChange }) => {
   return (
     <>
       <Label>{label}</Label>
-      <Input type={type} placeholder={placeholder}></Input>
+      <Input onChange={onChange} type={type} placeholder={placeholder}></Input>
     </>
   );
 };

@@ -1,7 +1,7 @@
 export const DataUser = [
   {
     id: "1",
-    nick: "Test",
+    username: "Test",
     password: "Test",
     email: "Test@Test.com",
     name: "Test",
@@ -12,27 +12,21 @@ export const DataUser = [
     condition: "Test",
     status: "Test",
     dateRegister: "12.21.21",
+    role: "user",
   },
   {
     id: "2",
-    nick: "Test",
-    password: "Test",
+    username: "Test2",
+    password: "Test2",
     email: "Test@Test.com",
-    name: "Test",
-    surname: "Test",
+    name: "Test2",
+    surname: "Test2",
     phone: "+48 123 321 123",
     pack: "Test",
     group: "Test",
     condition: "Test",
     status: "Test",
     dateRegister: "12.21.21",
+    role: "admin",
   },
 ];
-
-export const admin = [
-  {
-    nick: "Admin",
-    password: "Admin"
-  }
-]
-
