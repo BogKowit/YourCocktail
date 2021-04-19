@@ -13,6 +13,7 @@ export const LinkTo = styled(Link)`
     text-shadow: 4px 4px 6px #ffffff80;
     cursor: pointer;
     color: rgba(0, 0, 0, 0.6);
+    outline: none;
   }
 `;
 export const Button = styled.button`

@@ -1,6 +1,6 @@
 import React from "react";
 import {LinkTo, Button, Welcome } from "../../../assets/Login.style";
-import { Panel, Wrapper } from "../LoginPanel.style";
+import { Panel, Wrapper } from "../../../assets/template.styles";
 import SelectField from "../SelectField/SelectField";
 
 const LoginPasswordReset = () => {

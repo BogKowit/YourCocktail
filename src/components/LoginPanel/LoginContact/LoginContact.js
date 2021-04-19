@@ -1,13 +1,13 @@
 import React from "react";
 import {Info, Text,  LinkTo, Button, Welcome } from "../../../assets/Login.style";
-import { Panel2, Wrapper } from "../LoginPanel.style";
+import { PanelM, Wrapper } from "../../../assets/template.styles";
 
 
 // export const textContent
 const LoginContact = () => {
   return (
     <Wrapper>
-      <Panel2>
+      <PanelM>
         <Welcome>Kontakt</Welcome>
         <Text>
           Witaj Pozagalaktyczny przybyszu, jeśli pragniesz się z nami
@@ -21,7 +21,7 @@ const LoginContact = () => {
         <Text>ZaprzysiężeniGalaktycznymPaktem@gmail.com</Text>
         <Button> Wyślij </Button>
         <LinkTo to="login">Powrót do panelu Logowania</LinkTo>
-      </Panel2>
+      </PanelM>
     </Wrapper>
   );
 };

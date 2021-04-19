@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {LinkTo, Button, Welcome } from "../../../assets/Login.style";
-import { Panel2, Wrapper } from "../LoginPanel.style";
+import { PanelM, Wrapper } from "../../../assets/template.styles";
 import SelectField from "../SelectField/SelectField";
 
 // const FormRegistration = {
@@ -28,14 +28,13 @@ const LoginRegistration = () => {
 
   return (
     <Wrapper>
-      <Panel2>
+      <PanelM>
         <Welcome>Panel Rejestracyjny</Welcome>
         <SelectField
           type="text"
           placeholder="Wprowadź nazwę"
           value="nick"
           label="Nazwa:"
-          onChange={updateField}
         />
         <SelectField
           type="password"
@@ -57,7 +56,7 @@ const LoginRegistration = () => {
         />
         <Button> Zarejestruj </Button>
         <LinkTo to="login">Powrót do panelu Logowania</LinkTo>
-      </Panel2>
+      </PanelM>
     </Wrapper>
   );
 };
