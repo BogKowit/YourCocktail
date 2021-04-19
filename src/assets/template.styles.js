@@ -22,15 +22,14 @@ export const Panel = styled.div`
   color: white;
 `;
 
+export const PanelLogin = styled(Panel)`
+  height: 370px;
+`
 export const PanelM = styled(Panel)`
-
-  height: 450px;
-
+  height: 500px;
 `;
 
 export const PanelS = styled(Panel)`
-
-  height: 400px;
-
+  height: 450px;
 `;
 //zmiana wielkości tabeli przy zmianie zakładki

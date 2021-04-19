@@ -3,11 +3,10 @@ import styled from "styled-components";
 
 export const LinkTo = styled(Link)`
   text-decoration: none;
-  color: #ddd;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 12px;
-  margin-top: 12px;
   transition: all 0.3s ease-in-out;
-
+  margin-left: 5px;
   &:hover,
   :focus {
     text-shadow: 4px 4px 6px #ffffff80;
@@ -16,40 +15,29 @@ export const LinkTo = styled(Link)`
     outline: none;
   }
 `;
-export const Button = styled.button`
-  background-color: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.3);
+
+export const LinkWrapper = styled.div`
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px 5px 10px;
+  margin: 5px;
   border-radius: 25px;
-  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
-  color: white;
-  font-size: 14px;
-  font-weight: 00;
-  width: 40%;
-  height: 40px;
-  transition: all 0.3s ease-in-out;
-  font-weight: 600;
-  cursor: pointer;
-  &:focus,
-  :hover {
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-    text-shadow: 2px 2px 6px #00000040;
-    color: #00000095;
-    outline: none;
-  }
+  display: flex;
+  flex-direction: row;  
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const WrapperDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 15px;
 `;
 
 export const Welcome = styled.p`
   opacity: 0.7;
   font-size: 20px;
-  margin: 40px 0 20px;
+  margin: 35px 0 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-`;
-
-export const WrapperDiv = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: space-between;
 `;
 
 export const Text = styled.p`

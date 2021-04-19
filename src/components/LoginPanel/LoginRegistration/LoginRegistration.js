@@ -1,16 +1,17 @@
 import React, {useState} from "react";
-import {LinkTo, Button, Welcome } from "../../../assets/Login.style";
+import {LinkTo, Welcome } from "../../../assets/Login.style";
 import { PanelM, Wrapper } from "../../../assets/template.styles";
 import SelectField from "../SelectField/SelectField";
+import { Button } from "../../../assets/Buttons.styles";
 
-// const FormRegistration = {
-  // nick:'',
-  // password:'',
-  // passwordRep:'',
-  // email:''
-// }
+const FormRegistration = {
+  name:'',
+  password:'',
+  passwordRep:'',
+  email:''
+}
 
-const LoginRegistration = () => {
+const LoginRegistration = ({formValue}) => {
 // const [error, setError] = useState(null)
 // const [form, setForm] = useState({ FormRegistration });
 
@@ -33,25 +34,25 @@ const LoginRegistration = () => {
         <SelectField
           type="text"
           placeholder="Wprowadź nazwę"
-          value="nick"
+          // value={formValue.name}
           label="Nazwa:"
         />
         <SelectField
           type="password"
           placeholder="Wprowadź hasło"
-          value="password"
+          // value={formValue.password}
           label="Hasło:"
         />
         <SelectField
           type="password"
           placeholder="Wprowadź ponownie hasło"
-          value="password"
+          // value={formValue.passwordCheck}
           label="Ponownie hasło:"
         />
         <SelectField
           type="email"
           placeholder="Wprowadź e-mail"
-          value="email"
+          // value={formValue.email}
           label="E-mail kontaktowy:"
         />
         <Button> Zarejestruj </Button>

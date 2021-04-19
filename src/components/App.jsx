@@ -8,6 +8,7 @@ import LoginContact from './LoginPanel/LoginContact/LoginContact';
 import Home from '../conteners/Home/Home'
 
 import { createGlobalStyle } from "styled-components";
+import { IconContext } from 'react-icons/lib';
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
@@ -16,6 +17,11 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     background: linear-gradient(222deg, rgba(34,193,195,1) 0%, rgba(235,45,253,1) 100%);
   }
+  .react-icons {
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+}
 `
 
 
@@ -28,12 +34,14 @@ const NotFound = () => {
   )
 }
 
+
 export const UserContext = createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(localStorage.getItem('user'));
 
   return(
+    <IconContext.Provider value={{ className: 'react-icons' }}>
     <UserContext.Provider value={{ user, setUser}}>
     <Router>
       <GlobalStyle />
@@ -49,6 +57,7 @@ const App = () => {
         </Switch>
     </Router>
     </UserContext.Provider>
+    </IconContext.Provider>
   )
 }
 

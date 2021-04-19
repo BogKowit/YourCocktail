@@ -1,6 +1,7 @@
 import React from "react";
-import {Info, Text,  LinkTo, Button, Welcome } from "../../../assets/Login.style";
+import {Info, Text,  LinkTo, Welcome } from "../../../assets/Login.style";
 import { PanelM, Wrapper } from "../../../assets/template.styles";
+import {Button} from "../../../assets/Buttons.styles"
 
 
 // export const textContent
