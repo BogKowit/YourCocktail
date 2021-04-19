@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {LinkTo, Welcome } from "../../../assets/Login.style";
-import { PanelM, Wrapper } from "../../../assets/template.styles";
+import { PanelRegistration, Wrapper } from "../../../assets/template.styles";
 import SelectField from "../SelectField/SelectField";
 import { Button } from "../../../assets/Buttons.styles";
+import { ButtonBack } from "../../RoundedButton/RoundedButton";
 
 const FormRegistration = {
   name:'',
@@ -29,7 +30,7 @@ const LoginRegistration = ({formValue}) => {
 
   return (
     <Wrapper>
-      <PanelM>
+      <PanelRegistration>
         <Welcome>Panel Rejestracyjny</Welcome>
         <SelectField
           type="text"
@@ -56,8 +57,8 @@ const LoginRegistration = ({formValue}) => {
           label="E-mail kontaktowy:"
         />
         <Button> Zarejestruj </Button>
-        <LinkTo to="login">Powrót do panelu Logowania</LinkTo>
-      </PanelM>
+      <ButtonBack />
+      </PanelRegistration>
     </Wrapper>
   );
 };

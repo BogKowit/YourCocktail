@@ -1,14 +1,15 @@
 import React from "react";
 import {Info, Text,  LinkTo, Welcome } from "../../../assets/Login.style";
-import { PanelM, Wrapper } from "../../../assets/template.styles";
+import { PanelContact, Wrapper } from "../../../assets/template.styles";
 import {Button} from "../../../assets/Buttons.styles"
+import { ButtonBack } from "../../RoundedButton/RoundedButton";
 
 
 // export const textContent
 const LoginContact = () => {
   return (
     <Wrapper>
-      <PanelM>
+      <PanelContact>
         <Welcome>Kontakt</Welcome>
         <Text>
           Witaj Pozagalaktyczny przybyszu, jeśli pragniesz się z nami
@@ -21,8 +22,8 @@ const LoginContact = () => {
         <Info>E-mail kontaktowy</Info>
         <Text>ZaprzysiężeniGalaktycznymPaktem@gmail.com</Text>
         <Button> Wyślij </Button>
-        <LinkTo to="login">Powrót do panelu Logowania</LinkTo>
-      </PanelM>
+        <ButtonBack />
+      </PanelContact>
     </Wrapper>
   );
 };

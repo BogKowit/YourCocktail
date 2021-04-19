@@ -25,11 +25,13 @@ export const Panel = styled.div`
 export const PanelLogin = styled(Panel)`
   height: 370px;
 `
-export const PanelM = styled(Panel)`
-  height: 500px;
-`;
-
-export const PanelS = styled(Panel)`
+export const PanelRegistration = styled(Panel)`
   height: 450px;
+`;
+export const PanelResetPassword = styled(Panel)`
+  height: 370px;
+`;
+export const PanelContact = styled(Panel)`
+  height: 470px;
 `;
 //zmiana wielkości tabeli przy zmianie zakładki

@@ -13,6 +13,8 @@ export const Button = styled.button`
   transition: all 0.3s ease-in-out;
   font-weight: 600;
   cursor: pointer;
+  margin: 10px 0;
+
   &:focus,
   :hover {
     background: rgba(255, 255, 255, 0.6);
@@ -22,6 +24,4 @@ export const Button = styled.button`
     outline: none;
   }
 `;
-export const ButtonLogin = styled(Button)`
-  margin: 10px 0;
-`;
+

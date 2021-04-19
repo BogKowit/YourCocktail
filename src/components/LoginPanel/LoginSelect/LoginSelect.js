@@ -3,9 +3,9 @@ import {WrapperDiv, LinkTo, Welcome,LinkWrapper } from "../../../assets/Login.st
 import SelectField from "../SelectField/SelectField";
 import { login } from "../../../api/methods";
 import { UserContext } from '../../App' ;
-import {FiUserPlus} from "react-icons/fi"
-import { BsChatDots, BsQuestionCircle } from "react-icons/bs";
-import { ButtonLogin } from "../../../assets/Buttons.styles";
+import { ButtonRegister, ButtonPasswordReset, ButtonContact } from '../../RoundedButton/RoundedButton';
+import { Button } from "../../../assets/Buttons.styles";
+
 
 
 const LoginSelect = () => {
@@ -35,20 +35,11 @@ const LoginSelect = () => {
         label="Hasło:"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <ButtonLogin onClick={(e) => handleLogin(e)}>Zaloguj</ButtonLogin>
-      <LinkWrapper>
-        <FiUserPlus />
-        <LinkTo to="/register"> Zarejestruj użytkownika.</LinkTo>
-      </LinkWrapper>
+      <Button onClick={(e) => handleLogin(e)}>Zaloguj</Button>
+      <ButtonRegister />
       <WrapperDiv>
-        <LinkWrapper>
-          <BsQuestionCircle />
-          <LinkTo to="/passwordReset">Zapomniałeś Hasła?</LinkTo>
-        </LinkWrapper>
-        <LinkWrapper>
-          <BsChatDots />
-          <LinkTo to="/contact">Skontaktuj się z nami!</LinkTo>
-        </LinkWrapper>
+        <ButtonPasswordReset />
+        <ButtonContact />
       </WrapperDiv>
     </>
   );
