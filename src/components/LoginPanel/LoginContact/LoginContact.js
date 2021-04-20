@@ -1,9 +1,9 @@
 import React from "react";
-import {Info, Text,  LinkTo, Welcome } from "../../../assets/Login.style";
+import {Info, Text, Welcome } from "../../../assets/Login.style";
 import { PanelContact, Wrapper } from "../../../assets/template.styles";
 import {Button} from "../../../assets/Buttons.styles"
-import { ButtonBack } from "../../RoundedButton/RoundedButton";
-
+import { ButtonRounded } from "../../RoundedButton/RoundedButton";
+import { TiArrowBackOutline } from "react-icons/ti";
 
 // export const textContent
 const LoginContact = () => {
@@ -22,7 +22,11 @@ const LoginContact = () => {
         <Info>E-mail kontaktowy</Info>
         <Text>ZaprzysiężeniGalaktycznymPaktem@gmail.com</Text>
         <Button> Wyślij </Button>
-        <ButtonBack />
+        <ButtonRounded
+          icon={<TiArrowBackOutline />}
+          text="Powrót do panelu Logowania"
+          link="/login"
+        />
       </PanelContact>
     </Wrapper>
   );

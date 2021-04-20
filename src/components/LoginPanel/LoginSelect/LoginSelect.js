@@ -1,22 +1,23 @@
 import React, { useContext, useState } from 'react';
-import {WrapperDiv, LinkTo, Welcome,LinkWrapper } from "../../../assets/Login.style";
+import {WrapperDiv, Welcome } from "../../../assets/Login.style";
 import SelectField from "../SelectField/SelectField";
 import { login } from "../../../api/methods";
 import { UserContext } from '../../App' ;
-import { ButtonRegister, ButtonPasswordReset, ButtonContact } from '../../RoundedButton/RoundedButton';
+import { ButtonRounded } from '../../RoundedButton/RoundedButton';
 import { Button } from "../../../assets/Buttons.styles";
-
+import { BsChatDots, BsQuestionCircle } from "react-icons/bs";
+import { FiUserPlus } from "react-icons/fi";
 
 
 const LoginSelect = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const {setUser} = useContext(UserContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser } = useContext(UserContext);
 
-  const handleLogin = (event) =>{
+  const handleLogin = (event) => {
     event.preventDefault();
     login(username, password).then((response) => setUser(response));
-  }
+  };
 
   return (
     <>
@@ -36,10 +37,22 @@ const LoginSelect = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button onClick={(e) => handleLogin(e)}>Zaloguj</Button>
-      <ButtonRegister />
+      <ButtonRounded
+        icon={<FiUserPlus />}
+        text="Zarejestruj użytkownika."
+        link="/register"
+      />
       <WrapperDiv>
-        <ButtonPasswordReset />
-        <ButtonContact />
+        <ButtonRounded
+          icon={<BsQuestionCircle />}
+          text="Zapomniałeś Hasła"
+          link="/passwordReset"
+        />
+        <ButtonRounded
+          icon={<BsChatDots />}
+          text="Skontaktuj się z nami!"
+          link="/contact"
+        />
       </WrapperDiv>
     </>
   );

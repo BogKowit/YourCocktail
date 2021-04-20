@@ -1,15 +1,11 @@
-import React, {useState, useEffect, useContext, useHistory} from 'react';
-import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Welcome, Text } from "../../assets/Login.style";
+import React from 'react';
+import { Welcome } from "../../assets/Login.style";
 import {Panel, Wrapper} from '../../assets/template.styles';
-import { UserContext } from '../../components/App';
-import { StarRating } from '../StarRating'
 import { Button } from "../../assets/Buttons.styles"
 
 
 const Home = () => {
-  const { setUser } = useContext(UserContext);
+
     const handleLogout = (event) =>{
       localStorage.removeItem('user');
       event.preventDefault()
