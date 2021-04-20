@@ -8,5 +8,3 @@ export const ButtonRounded = ({ icon, text, link }) => {
     </LinkWrapper>
   );
 };
-//TODO: SPRÓBOWAĆ OSTYLOWAĆ IKONE
-//FIXME: ZMIENIĆ RESZTĘ BUTTONÓW

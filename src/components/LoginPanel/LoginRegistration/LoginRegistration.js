@@ -1,63 +1,77 @@
-import React from "react";
+import React, {useState} from "react";
 import { Welcome } from "../../../assets/Login.style";
 import { PanelRegistration, Wrapper } from "../../../assets/template.styles";
-import SelectField from "../SelectField/SelectField";
+import { SelectFieldRegistration } from "../SelectField/SelectField";
 import { Button } from "../../../assets/Buttons.styles";
 import {  ButtonRounded } from "../../RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
 
 const FormRegistration = {
-  name:'',
-  password:'',
-  passwordRep:'',
-  email:''
-}
+  name: "",
+  password: "",
+  passwordCheck: "",
+  email: "",
+};
 
-const LoginRegistration = ({formValue}) => {
+const LoginRegistration = () => {
 // const [error, setError] = useState(null)
-// const [form, setForm] = useState({ FormRegistration });
+const [registerFomValue, setRegisterFomValue] = useState(FormRegistration);
+const handleFormValue = e =>{
+  e.preventDefault();
+  setRegisterFomValue({
+    ...registerFomValue,
+    [e.target.name]: e.target.value
+  })
+}
+const handleAddUser = {
+  name: registerFomValue.name,
+  password: registerFomValue.password,
+  passwordRep: registerFomValue.passwordCheck,
+  email: registerFomValue.email,
+};
 
-// const handleSubmit = e =>{
-//   e.preventDefault()
-//   console.log(form);
-// }
 
-// const updateField = event =>{
-//   setForm({
-//     ...form,
-//     [event.target.name]: e.target.value
-//   })
-// }
-
+  //TODO:dodać usera
+  //TODO:Zrobić botton
+  //TODO:resetowanie
   return (
     <Wrapper>
-      <PanelRegistration>
+      <PanelRegistration as="form">
         <Welcome>Panel Rejestracyjny</Welcome>
-        <SelectField
+        <SelectFieldRegistration
           type="text"
           placeholder="Wprowadź nazwę"
-          // value={formValue.name}
+          name="name"
+          value={registerFomValue.name}
           label="Nazwa:"
+          onChange={handleFormValue}
+          // onChange={e => setForm({...form,})}
         />
-        <SelectField
+        <SelectFieldRegistration
           type="password"
           placeholder="Wprowadź hasło"
-          // value={formValue.password}
+          name="password"
+          value={registerFomValue.password}
           label="Hasło:"
+          onChange={handleFormValue}
         />
-        <SelectField
+        <SelectFieldRegistration
           type="password"
           placeholder="Wprowadź ponownie hasło"
-          // value={formValue.passwordCheck}
+          name="passwordCheck"
+          value={registerFomValue.passwordCheck}
           label="Ponownie hasło:"
+          onChange={handleFormValue}
         />
-        <SelectField
+        <SelectFieldRegistration
           type="email"
           placeholder="Wprowadź e-mail"
-          // value={formValue.email}
+          name="email"
+          value={registerFomValue.email}
           label="E-mail kontaktowy:"
+          onChange={handleFormValue}
         />
-        <Button> Zarejestruj </Button>
+        <Button onClick={(e) => e.preventDefault()}> Zarejestruj </Button>
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"

@@ -1,7 +1,7 @@
 import React from "react"
 import { Label, Input } from "./SelectField.style";
 
-const SelectField = ({ type, value, label, placeholder, onChange,}) => {
+export const SelectField = ({ type, value, label, placeholder, onChange,}) => {
   return (
     <>
       <Label>{label}</Label>
@@ -10,4 +10,17 @@ const SelectField = ({ type, value, label, placeholder, onChange,}) => {
   );
 };
 
-export default SelectField;
+export const SelectFieldRegistration = ({ type, value, label, placeholder, onChange, name }) => {
+  return (
+    <>
+      <Label>{label}</Label>
+      <Input
+        onChange={onChange}
+        value={value}
+        type={type}
+        placeholder={placeholder}
+        name={name}
+      ></Input>
+    </>
+  );
+};

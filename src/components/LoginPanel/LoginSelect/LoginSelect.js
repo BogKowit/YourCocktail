@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {WrapperDiv, Welcome } from "../../../assets/Login.style";
-import SelectField from "../SelectField/SelectField";
+import { SelectField } from "../SelectField/SelectField";
 import { login } from "../../../api/methods";
 import { UserContext } from '../../App' ;
 import { ButtonRounded } from '../../RoundedButton/RoundedButton';

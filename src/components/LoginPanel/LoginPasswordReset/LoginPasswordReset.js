@@ -1,7 +1,7 @@
 import React from "react";
 import { Welcome } from "../../../assets/Login.style";
 import { PanelResetPassword, Wrapper } from "../../../assets/template.styles";
-import SelectField from "../SelectField/SelectField";
+import { SelectField } from "../SelectField/SelectField";
 import { Button } from "../../../assets/Buttons.styles";
 import { BsChatDots } from "react-icons/bs";
 import { TiArrowBackOutline } from "react-icons/ti";
