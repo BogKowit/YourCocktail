@@ -1,8 +1,8 @@
 import React from "react";
-import {Info, Text, Welcome } from "../../../assets/Login.style";
+import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
+import { Info, Text, Welcome } from "../../../assets/Login.style";
 import { PanelContact, Wrapper } from "../../../assets/template.styles";
-import {Button} from "../../../assets/Buttons.styles"
-import { ButtonRounded } from "../../RoundedButton/RoundedButton";
+import { Button } from "../../../assets/Buttons.styles";
 import { TiArrowBackOutline } from "react-icons/ti";
 
 // export const textContent

@@ -16,6 +16,10 @@ export const LinkTo = styled(Link)`
   }
 `;
 
+export const LinkToMiddle = styled(LinkTo)`
+  text-align: center;
+  `;
+
 export const LinkWrapper = styled.div`
   background: rgba(255, 255, 255, 0.2);
   padding: 5px 10px 5px 10px;
@@ -26,6 +30,11 @@ export const LinkWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const LinkWrapperFull =styled(LinkWrapper)`
+  width: 200px;
+  justify-content: center
+`
 
 export const WrapperDiv = styled.div`
   display: flex;

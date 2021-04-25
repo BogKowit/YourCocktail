@@ -1,12 +1,11 @@
 import React from "react";
 import { Welcome } from "../../../assets/Login.style";
 import { PanelResetPassword, Wrapper } from "../../../assets/template.styles";
-import { SelectField } from "../SelectField/SelectField";
+import { SelectField } from "../../../components/SelectField/SelectField";
 import { Button } from "../../../assets/Buttons.styles";
 import { BsChatDots } from "react-icons/bs";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { ButtonRounded } from "../../RoundedButton/RoundedButton";
-
+import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 
 const LoginPasswordReset = () => {
   return (

@@ -1,4 +1,10 @@
-import { LinkTo, LinkWrapper } from "../../assets/Login.style";
+import React from 'react'
+import {
+  LinkTo,
+  LinkWrapper,
+  LinkWrapperFull,
+  LinkToMiddle,
+} from "../../assets/Login.style";
 
 export const ButtonRounded = ({ icon, text, link }) => {
   return (
@@ -6,5 +12,14 @@ export const ButtonRounded = ({ icon, text, link }) => {
       {icon ? icon : null}
       <LinkTo to={link}>{text}</LinkTo>
     </LinkWrapper>
+  );
+};
+
+export const ButtonRoundedFull = ({ icon, text, link }) => {
+  return (
+    <LinkWrapperFull>
+      {icon ? icon : null}
+      <LinkToMiddle to={link}>{text}</LinkToMiddle>
+    </LinkWrapperFull>
   );
 };

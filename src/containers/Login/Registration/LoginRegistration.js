@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import { Welcome } from "../../../assets/Login.style";
 import { PanelRegistration, Wrapper } from "../../../assets/template.styles";
-import { SelectFieldRegistration } from "../SelectField/SelectField";
+import { SelectFieldRegistration } from "../../../components/SelectField/SelectField";
 import { Button } from "../../../assets/Buttons.styles";
-import {  ButtonRounded } from "../../RoundedButton/RoundedButton";
+import {  ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
 
 const FormRegistration = {
@@ -13,30 +13,63 @@ const FormRegistration = {
   email: "",
 };
 
+
+// const validate = registerFomValue => {
+//   if (!registerFomValue.email) {
+//     return "e-mail jest wymagany";
+//   } else if (
+//     !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
+//       registerFomValue.email)) {
+//     return "Zły e-mail";
+//   }
+
+//   if (!registerFomValue.name) {
+//         return "Imię jest wymagane";
+//   } else if (form.name.length < 2) {
+//     return "imię jezt za krótkie"
+//   }
+
+//   if (!registerFomValue.password) {
+//     return "hasło jest wymagane"
+//   } else if (registerFomValue.password.length < 5){
+//     return "hasło jest za krótkie"
+//   }
+
+//   if (!registerFomValue.passwordCheck) {
+//     return "Powtórzenie hasła jest wymagane";
+//   } else if (registerFomValue.passwordCheck.length < 5){
+//     return "Powtórzone hasło jest za krótkie"
+//   }
+
+//   if (registerFomValue.password !== registerFomValue.passwordCheck) {
+//     return "Hasła się różnią"
+//   }
+
+//   //jeżeli nic nie znalazła to wszystko poszło SpoczkoOczko
+//   return null
+// }
+
 const LoginRegistration = () => {
-// const [error, setError] = useState(null)
+const [error, setError] = useState("")
 const [registerFomValue, setRegisterFomValue] = useState(FormRegistration);
 const handleFormValue = e =>{
-  e.preventDefault();
-  setRegisterFomValue({
-    ...registerFomValue,
-    [e.target.name]: e.target.value
-  })
+    // [e.target.name]: e.target.value
 }
-const handleAddUser = {
-  name: registerFomValue.name,
-  password: registerFomValue.password,
-  passwordRep: registerFomValue.passwordCheck,
-  email: registerFomValue.email,
-};
+const handleSubmit = (e) => {
+}
+
+// const handleAddUser = () = {
+//   name: registerFomValue.name,
+//   password: registerFomValue.password,
+//   passwordRep: registerFomValue.passwordCheck,
+//   email: registerFomValue.email,
+// };
+console.log(registerFomValue);
 
 
-  //TODO:dodać usera
-  //TODO:Zrobić botton
-  //TODO:resetowanie
   return (
     <Wrapper>
-      <PanelRegistration as="form">
+      <PanelRegistration >
         <Welcome>Panel Rejestracyjny</Welcome>
         <SelectFieldRegistration
           type="text"
@@ -45,7 +78,6 @@ const handleAddUser = {
           value={registerFomValue.name}
           label="Nazwa:"
           onChange={handleFormValue}
-          // onChange={e => setForm({...form,})}
         />
         <SelectFieldRegistration
           type="password"
@@ -71,7 +103,7 @@ const handleAddUser = {
           label="E-mail kontaktowy:"
           onChange={handleFormValue}
         />
-        <Button onClick={(e) => e.preventDefault()}> Zarejestruj </Button>
+        <Button onClick={handleSubmit}> Zarejestruj </Button>
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
@@ -83,3 +115,7 @@ const handleAddUser = {
 };
 
 export default LoginRegistration;
+
+  //TODO:dodać usera
+  //TODO:Zrobić botton
+  //TODO:resetowanie
