@@ -21,9 +21,6 @@ import NotFound from './components/Navigation/NotFound'
 import GlobalStyle from './assets/global.style'
 import { IconContext } from 'react-icons/lib';
 
-import { Provider } from 'react-redux'
-
-
 export const UserContext = createContext(null);
 
 const App = () => {

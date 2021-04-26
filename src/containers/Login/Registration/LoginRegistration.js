@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import { Welcome } from "../../../assets/Login.style";
 import { PanelRegistration, Wrapper } from "../../../assets/template.styles";
 import { SelectFieldRegistration } from "../../../components/SelectField/SelectField";
@@ -13,63 +13,29 @@ const FormRegistration = {
   email: "",
 };
 
-
-// const validate = registerFomValue => {
-//   if (!registerFomValue.email) {
-//     return "e-mail jest wymagany";
-//   } else if (
-//     !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
-//       registerFomValue.email)) {
-//     return "Zły e-mail";
-//   }
-
-//   if (!registerFomValue.name) {
-//         return "Imię jest wymagane";
-//   } else if (form.name.length < 2) {
-//     return "imię jezt za krótkie"
-//   }
-
-//   if (!registerFomValue.password) {
-//     return "hasło jest wymagane"
-//   } else if (registerFomValue.password.length < 5){
-//     return "hasło jest za krótkie"
-//   }
-
-//   if (!registerFomValue.passwordCheck) {
-//     return "Powtórzenie hasła jest wymagane";
-//   } else if (registerFomValue.passwordCheck.length < 5){
-//     return "Powtórzone hasło jest za krótkie"
-//   }
-
-//   if (registerFomValue.password !== registerFomValue.passwordCheck) {
-//     return "Hasła się różnią"
-//   }
-
-//   //jeżeli nic nie znalazła to wszystko poszło SpoczkoOczko
-//   return null
-// }
-
 const LoginRegistration = () => {
 const [error, setError] = useState("")
 const [registerFomValue, setRegisterFomValue] = useState(FormRegistration);
+const [checked, toggle] = useReducer(value => !value, false);
+
 const handleFormValue = e =>{
-    // [e.target.name]: e.target.value
+  setRegisterFomValue({
+    [e.target.name]: e.target.value})
 }
 const handleSubmit = (e) => {
+  console.log({registerFomValue});
 }
 
-// const handleAddUser = () = {
-//   name: registerFomValue.name,
-//   password: registerFomValue.password,
-//   passwordRep: registerFomValue.passwordCheck,
-//   email: registerFomValue.email,
-// };
 console.log(registerFomValue);
 
+useEffect(() => {
+ console.log(checked ? "Tak, zaznaczone" : "Nie, nie zaznaczone");
+ localStorage.setItem("checkbox-value", checked);
+});
 
   return (
     <Wrapper>
-      <PanelRegistration >
+      <PanelRegistration>
         <Welcome>Panel Rejestracyjny</Welcome>
         <SelectFieldRegistration
           type="text"
@@ -103,6 +69,15 @@ console.log(registerFomValue);
           label="E-mail kontaktowy:"
           onChange={handleFormValue}
         />
+        <div>
+          <label>Akceptuję regulamin rejestracji</label>
+          <input
+            type="checkbox"
+            value={checked}
+            onChange={toggle}
+          />
+        </div>
+
         <Button onClick={handleSubmit}> Zarejestruj </Button>
         <ButtonRounded
           icon={<TiArrowBackOutline />}
@@ -119,3 +94,4 @@ export default LoginRegistration;
   //TODO:dodać usera
   //TODO:Zrobić botton
   //TODO:resetowanie
+  //TODO:Ostylować input
