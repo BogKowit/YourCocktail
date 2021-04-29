@@ -25,3 +25,9 @@ export const Button = styled.button`
   }
 `;
 
+// export const ButtonAdminStyle = styled.button`
+//   width: 20px;
+//   height: 20px;
+//   background-color: ${(color) => (color? 'red' :'grey')};
+//   border-radius: 50%;
+// `

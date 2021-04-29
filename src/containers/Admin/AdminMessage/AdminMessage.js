@@ -3,7 +3,7 @@ import { Panel, Wrapper } from "../../../assets/template.styles";
 import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
 
-export default function AdminMessage() {
+const AdminMessage = () => {
   return (
     <Wrapper>
       <Panel>
@@ -15,4 +15,6 @@ export default function AdminMessage() {
       </Panel>
     </Wrapper>
   );
-}
+};
+
+export default AdminMessage;

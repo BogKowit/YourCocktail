@@ -3,7 +3,7 @@ import { Welcome } from "../../../assets/Login.style";
 import {Panel, Wrapper} from '../../../assets/template.styles';
 import { Button } from "../../../assets/Buttons.styles"
 import { ButtonRounded, ButtonRoundedFull } from "../../../components/RoundedButton/RoundedButton";
-import { GrMap } from "react-icons/Gr"
+import { GrMap } from "react-icons/gr"
 import { BiUserCircle } from "react-icons/bi"
 import { RiSurveyLine, RiTeamFill } from "react-icons/ri";
 import { MdAddAPhoto} from "react-icons/md"
