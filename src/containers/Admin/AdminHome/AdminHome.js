@@ -9,10 +9,10 @@ import { RiExchangeDollarFill } from 'react-icons/ri'
 
 const AdminHome = () => {
 
-  const handleLogout = (event) => {
+  const handleLogout = (e) => {
     localStorage.removeItem("user");
-    event.preventDefault();
     window.location.href = "/";
+    e.preventDefault();
   };
 
   return (

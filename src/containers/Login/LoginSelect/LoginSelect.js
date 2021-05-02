@@ -8,7 +8,7 @@ import { BsChatDots, BsQuestionCircle } from "react-icons/bs";
 import { FiUserPlus } from "react-icons/fi";
 import { Wrapper, PanelLogin } from "../../../assets/template.styles";
 import { Redirect } from "react-router";
-
+// import BackGroundColor from "../../../components/BackGroundColor/BackGroundColor"
 
 const LoginSelect = () => {
   const [username, setUsername] = useState("");

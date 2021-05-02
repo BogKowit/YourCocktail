@@ -18,7 +18,7 @@ export const LinkTo = styled(Link)`
 
 export const LinkToMiddle = styled(LinkTo)`
   text-align: center;
-  `;
+`;
 
 export const LinkWrapper = styled.div`
   background: rgba(255, 255, 255, 0.2);
@@ -26,14 +26,14 @@ export const LinkWrapper = styled.div`
   margin: 5px;
   border-radius: 25px;
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 
 export const LinkWrapperFull =styled(LinkWrapper)`
   width: 200px;
-  justify-content: center
+  justify-content: center;
 `
 
 export const WrapperDiv = styled.div`

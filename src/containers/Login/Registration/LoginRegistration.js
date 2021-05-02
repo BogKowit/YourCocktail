@@ -5,33 +5,155 @@ import { SelectFieldRegistration } from "../../../components/SelectField/SelectF
 import { Button } from "../../../assets/Buttons.styles";
 import {  ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
+import axios from "axios"
 
 const FormRegistration = {
   name: "",
   password: "",
   passwordCheck: "",
   email: "",
+  checked: false,
+  error: [],
+  validate: false,
+};
+
+const reducerTypes = {
+  inputChange: "INPUT CHANGE",
+  clearValue: "CLEAR VALUE",
+  checkToggle: "CHECK TOGGLE",
+  throwError: "THROW ERROR",
+  addUser: "ADD USER",
+};
+
+const reducer = (state,action) =>{
+  switch (action.type) {
+    case "INPUT CHANGE":
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    case "CLEAR VALUE":
+      return FormRegistration
+    case "CHECK TOGGLE":
+      return {
+        ...state,
+        checked: !state.checked,
+      };
+    case "THROW ERROR":
+      return {
+        ...state,
+        error: action.errorValue,
+      };
+    case "ADD USER":
+      return{
+      }
+    default:
+      return state;
+  }
 };
 
 const LoginRegistration = () => {
-const [error, setError] = useState("")
-const [registerFomValue, setRegisterFomValue] = useState(FormRegistration);
-const [checked, toggle] = useReducer(value => !value, false);
-
-const handleFormValue = e =>{
-  setRegisterFomValue({
-    [e.target.name]: e.target.value})
-}
-const handleSubmit = (e) => {
-  console.log({registerFomValue});
-}
-
+  const [registerFomValue, dispatch] = useReducer(
+    reducer,
+    FormRegistration
+    );
 console.log(registerFomValue);
 
-useEffect(() => {
- console.log(checked ? "Tak, zaznaczone" : "Nie, nie zaznaczone");
- localStorage.setItem("checkbox-value", checked);
-});
+const handleFormValue = (e) => {
+  dispatch({
+    type: reducerTypes.inputChange,
+    field: e.target.name,
+    value: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  validate();
+  if (registerFomValue.error === true){
+    await axios
+    .post("http://localhost:1337/dupas", {
+      registerFomValue,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  registerFomValue.error === true
+  ? dispatch({ type: reducerTypes.clearValue })
+  : console.log("dupa");
+};
+
+
+const validate = () => {
+  if (!registerFomValue.email) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "e-mail jest wymagany",
+    });
+  } else if (
+    !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
+      registerFomValue.email
+    )
+  ) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "Zły e-mail",
+    });
+  }
+  else if (!registerFomValue.name) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "Imię jest wymagane",
+    });
+  } else if (registerFomValue.name.length < 3) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "imię jezt za krótkie",
+    });
+  }
+  else if (!registerFomValue.password) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "hasło jest wymagane",
+    });
+  } else if (registerFomValue.password.length < 5) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "hasło jest za krótkie",
+    });
+  }
+  else if (!registerFomValue.passwordCheck) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "Powtórzenie hasła jest wymagane",
+    });
+  } else if (registerFomValue.passwordCheck.length < 5) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "Powtórzone hasło jest za krótkie",
+    });
+  }
+  else if (registerFomValue.password !== registerFomValue.passwordCheck) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "Hasła się różnią",
+    });
+  }
+  else if (!registerFomValue.checked) {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: "ZAAKCEPTUJ REGULAMIN",
+    });
+  }
+  else return (dispatch({
+      type: reducerTypes.throwError,
+      errorValue: true,
+    }))
+};
 
   return (
     <Wrapper>
@@ -73,12 +195,15 @@ useEffect(() => {
           <label>Akceptuję regulamin rejestracji</label>
           <input
             type="checkbox"
-            value={checked}
-            onChange={toggle}
+            value={registerFomValue.check}
+            onChange={() => dispatch({ type: "CHECK TOGGLE" })}
           />
         </div>
 
-        <Button onClick={handleSubmit}> Zarejestruj </Button>
+        <Button onClick={handleSubmit}>
+          Zarejestruj
+        </Button>
+        {registerFomValue.error ? <p>{registerFomValue.error}</p>: <p>Rejestracja pomyślna</p>}
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
@@ -90,8 +215,3 @@ useEffect(() => {
 };
 
 export default LoginRegistration;
-
-  //TODO:dodać usera
-  //TODO:Zrobić botton
-  //TODO:resetowanie
-  //TODO:Ostylować input

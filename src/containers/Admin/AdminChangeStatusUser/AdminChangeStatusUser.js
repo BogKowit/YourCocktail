@@ -8,7 +8,7 @@ import AdminUserListStatus from "../../../components/AdminUserListStatus/AdminUs
 import Scroll from "../../../components/Scroll/Scroll";
 // import { AdminUserPayList } from "./AdminUserPayList.styled";
 
-const adminChangeUserStatus = () => {
+const AdminChangeUserStatus = () => {
   return (
     <Wrapper>
       <Panel>
@@ -28,4 +28,4 @@ const adminChangeUserStatus = () => {
 
 //TODO: Style
 //TODO: zmiana statusu
-export default adminChangeUserStatus;
+export default AdminChangeUserStatus;

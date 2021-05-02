@@ -21,7 +21,12 @@ import Home from './containers/User/UserHome/UserHome.js';
 import NotFound from './components/Navigation/NotFound';
 import GlobalStyle from './assets/global.style';
 import { IconContext } from 'react-icons/lib';
+////////////////////
+import AdminDeleteUser from './components/AdminPanel/AdminDeleteUser/AdminDeleteUser'
 export const UserContext = createContext(null);
+
+
+//TODO: GLobalnie dla admina deleteuser
 
 const App = () => {
   const [user, setUser] = useState(localStorage.getItem('user'));
