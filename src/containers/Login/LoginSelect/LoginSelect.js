@@ -1,19 +1,41 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import {WrapperDiv, Welcome } from "../../../assets/Login.style";
 import { SelectField } from "../../../components/SelectField/SelectField";
-import { login } from "../../../api/methods";
 import { ButtonRounded } from '../../../components/RoundedButton/RoundedButton';
 import { Button } from "../../../assets/Buttons.styles";
 import { BsChatDots, BsQuestionCircle } from "react-icons/bs";
 import { FiUserPlus } from "react-icons/fi";
 import { Wrapper, PanelLogin } from "../../../assets/template.styles";
-import { Redirect } from "react-router";
-// import BackGroundColor from "../../../components/BackGroundColor/BackGroundColor"
+import axios from 'axios'
+
 
 const LoginSelect = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [userData, setUserData] = useState(loadJSON(`user:${login}`));
+  const [dataUser, setDataUser] = useState("");
+  const [error, setError] = useState("");
+  useEffect(() => {
+    axios
+      .get("http://localhost:1337/dupas")
+      .then((response) => {
+        // console.log(response);
+        const data = response.data;
+        setDataUser(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const dupa = () => {
+    const userFound = dataUser.filter(
+      (user) =>
+      user.name === username &&
+      user.password === password
+    );
+    if (userFound.length > 0) {
+      console.log("udało się");
+    } else setError('No DUPA, spróbój ponownie')}
 
   return (
     <Wrapper>
@@ -34,7 +56,8 @@ const LoginSelect = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         {/* //////////////////////////////////////////////////////////// */}
-        <Button onClick={(e) => handleLogin(e)}>Zaloguj</Button>
+        <Button onClick={(e) => dupa(e)}>Zaloguj</Button>
+        {error}
         {/* //////////////////////////////////////////////////////////// */}
         <ButtonRounded
           icon={<FiUserPlus />}
@@ -59,3 +82,6 @@ const LoginSelect = () => {
 }
 
 export default LoginSelect;
+
+//TODO:DODAĆ Add user => localStorage;
+//TODO:DODAĆ Add panel change to login;

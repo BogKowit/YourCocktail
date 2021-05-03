@@ -42,4 +42,6 @@ export const Input = styled.input`
     color: rgba(255, 255, 255, 0.5);
   }
 `;
-
+export const TextArea = styled(Input)`
+  height: 100px;
+`;

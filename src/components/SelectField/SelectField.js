@@ -1,11 +1,20 @@
 import React from "react"
-import { Label, Input } from "./SelectField.style";
+import { Label, Input, TextArea } from "./SelectField.style";
 
 export const SelectField = ({ type, value, label, placeholder, onChange,}) => {
   return (
     <>
       <Label>{label}</Label>
       <Input onChange={onChange} type={type} placeholder={placeholder}></Input>
+    </>
+  );
+};
+
+export const TextAreaField = ({ type, value, label, placeholder, onChange }) => {
+  return (
+    <>
+      <Label>{label}</Label>
+      <TextArea onChange={onChange} type={type} placeholder={placeholder}></TextArea>
     </>
   );
 };

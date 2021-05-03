@@ -68,25 +68,25 @@ const handleFormValue = (e) => {
 };
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
+  e.preventDefault()
   validate();
-  if (registerFomValue.error === true){
+  /////////////////////////Zakopałem się
     await axios
-    .post("http://localhost:1337/dupas", {
-      registerFomValue,
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-  registerFomValue.error === true
-  ? dispatch({ type: reducerTypes.clearValue })
-  : console.log("dupa");
-};
-
+      .post("http://localhost:1337/dupas", {
+        name: registerFomValue.name,
+        password: registerFomValue.password,
+        email: registerFomValue.email,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    dispatch({ type: reducerTypes.clearValue })
+    //setUser(data) local strage
+    //zmiana na panel
+    }
 
 const validate = () => {
   if (!registerFomValue.email) {
@@ -149,10 +149,7 @@ const validate = () => {
       errorValue: "ZAAKCEPTUJ REGULAMIN",
     });
   }
-  else return (dispatch({
-      type: reducerTypes.throwError,
-      errorValue: true,
-    }))
+  else return console.log('dupa')
 };
 
   return (
@@ -203,7 +200,7 @@ const validate = () => {
         <Button onClick={handleSubmit}>
           Zarejestruj
         </Button>
-        {registerFomValue.error ? <p>{registerFomValue.error}</p>: <p>Rejestracja pomyślna</p>}
+        {registerFomValue.error ? <p>{registerFomValue.error}</p> : null}
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
@@ -215,3 +212,9 @@ const validate = () => {
 };
 
 export default LoginRegistration;
+
+//FIXME:NAPRAWIĆ REJESTRACJE NA 1 kliknięcie
+//FIXME:NAprawić akceptacje regulamina(reset)
+//TODO: Email-validacja,nazwa użytkownika z obecnymi
+//TODO: Wyświetlanie się więcej niż jednego błedu poprzez validacji
+//TODO: ADD USER przekierowanie na zalogowanego użytkownika
