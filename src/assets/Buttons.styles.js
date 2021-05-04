@@ -25,9 +25,10 @@ export const Button = styled.button`
   }
 `;
 
-// export const ButtonAdminStyle = styled.button`
-//   width: 20px;
-//   height: 20px;
-//   background-color: ${(color) => (color? 'red' :'grey')};
-//   border-radius: 50%;
-// `
+  // export const ButtonAdminStyle = styled.button`
+  //   width: 30px;
+  //   height: 30px;
+  //   background-color: ${({ color }) =>
+  //     color == "activeUser" ? "green" : "red"};
+  //   border-radius: 50%;
+  // `;

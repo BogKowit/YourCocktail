@@ -1,58 +1,60 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { UserStatus } from "./AdminUserListStatus.style";
 import styled from "styled-components";
 import { BiUserX, BiUserCheck } from "react-icons/bi";
+// import { ButtonAdminStyle } from '../../assets/Buttons.styles';
 
+
+  const UserStatus = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  overflow-y: scroll;
+  height: 60%;
+`;
+
+
+//TODO:https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
+
+  const ListUser = styled.li`
+    background-color: rgba(20, 88, 88, 0.3);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid grey;
+  `;
+  const ListUserLine = styled.div`
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+  `;
+  const UserColumn = styled.p`
+  margin: 1px 0;
+  `;
+  const UserData = styled.p`
+  margin: 1px 0;
+  `
   const ButtonAdminStyle = styled.button`
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background-color: ${({ color }) =>
       color == "activeUser" ? "green" : "red"};
     border-radius: 50%;
   `;
-
-  const ListUser = styled.li`
-    display: flex;
-    flex-direction: column;
-  `
-  const UserDataTable = styled.div`
-  display:flex;
-  `
-  const DataTable = styled.p`
-  width: 50px;
-  `
-
-//TODO:https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
-  const ButtonAdmin = ({ text, onClick, color, icon, key }) => {
+  const ButtonAdmin = ({ text, onClick, color, icon}) => {
     return (
       <>
         <label>{text}</label>
-        <ButtonAdminStyle onClick={onClick} color={color} key={key}>
+        <ButtonAdminStyle onClick={onClick} color={color}>
           {icon ? icon : null}
         </ButtonAdminStyle>
       </>
     );
   };
-
-//TODO: Zmiana kolorów ze względu na status wpłaty
-//TODO: DODAĆ IKONE NA MIEJSCE
-const usersDownload = () => {
-  return new Promise ((resolve, reject) => {
-    setTimeout(()=>{
-      if(success){
-        resolve(...userData);
-      } else {
-        reject({message: 'Error'});
-      }
-    }, 2000)
-  });
-}
-
-
+  
 const AdminUserListStatus = () => {
   const [userData, setUserData] = useState([]);
-  const [isLoading, setIsLoading] = useState()
 
   console.log(...userData);
   useEffect(() => {
@@ -67,51 +69,58 @@ const AdminUserListStatus = () => {
       });
   }, []);
 
-  const handleDeleteUser = (e, id,name) => {
-    console.log(id+name)
-      useEffect(() => {
-    axios
-    .delete(`http://localhost:1337/dupas/${id}`)
-    .then(res =>{
-      console.log(res);
-      console.log(res.data)
-    })
-    .catch((err) =>{
-      console(err);
-    });
-  }, []);
-  }
-
-  const handleUserStatus = (e, id) =>{
+  const handleDeleteUser = (e, id) => {
     console.log(id);
-  }
+    axios
+      .delete(`http://localhost:1337/dupas/${id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console(err);
+      });
+  };
+
+  const SearchBarTitle = styled.div`
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  `;
+
+  const SearchBar = () => (
+    <form action="/" method="get">
+      <label htmlFor="header-search">
+        <SearchBarTitle>Wyszukaj użytkownika</SearchBarTitle>
+      </label>
+      <input type="text" id="header-search" placeholder="Wyszkuj se" name="s" />
+      <button type="submit">Search</button>
+    </form>
+  );
+  const Search = () => {};
+  //https://www.emgoto.com/react-search-bar/
   return (
     <UserStatus>
+      {/* <SearchBar  */}
       {userData.map((v) => (
-        <ListUser key={v.id + v.name}>
-          <UserDataTable>
-            <DataTable>Imię:</DataTable>
-            <p>{v.name} </p>
-          </UserDataTable>
-          <UserDataTable>
-            <DataTable>Nazwisko:</DataTable>
-            <p>{v.surname}</p>
-          </UserDataTable>
-          {/* <p>{v.pay !== true ? "nie opłacono" : "opłacono"}</p> */}
-          {/* <ButtonAdmin */}
-          {/* // text="Zmień status" */}
-          {/* // onClick={(e) => handleUserStatus(e, v.id)} */}
-          {/* // color="activeUser" */}
-          {/* // icon={<BiUserCheck />} */}
-          {/* // key={v.id + v.name} */}
-          {/* // /> */}
+        <ListUser key={v.id}>
+          <ListUserLine>
+            <UserColumn>Nazwa:</UserColumn>
+            <UserData>{v.name} </UserData>
+          </ListUserLine>
+
+          <ListUserLine>
+            <UserColumn>E-mail:</UserColumn>
+            <UserData>{v.email} </UserData>
+          </ListUserLine>
           <ButtonAdmin
             text="Usuń użytkownika"
-            // onClick={(e) => handleUserDelete(e)}
-            onClick={(e) => handleDeleteUser(e, v.id, v.name)}
-            color="deleteUser"
+            onClick={(e) => handleDeleteUser(e, v.id)}
             icon={<BiUserX />}
-            key={v.id + v.name}
           />
         </ListUser>
       ))}
@@ -120,3 +129,7 @@ const AdminUserListStatus = () => {
 };
 
 export default AdminUserListStatus;
+
+//FIXME: przywracanie ponownej listy użytkoników
+//TODO: Ostylowacc to lepiej
+//TODO: Stworzyć wyszukiwarkę

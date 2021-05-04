@@ -8,7 +8,7 @@ import { SelectFieldRegistration } from "../../../components/SelectField/SelectF
 import { ErrorMessage } from "../../../assets/adds.styles";
 import axios from "axios";
 
-export const messageForm = {
+const messageForm = {
   name: "",
   phone: "",
   email: "",
@@ -17,10 +17,9 @@ export const messageForm = {
 const reducerTypes = {
   inputChange: "INPUT CHANGE",
   clearValue: "CLEAR VALUE",
-  checkToggle: "CHECK TOGGLE",
   throwError: "THROW ERROR",
-  addUser: "ADD USER",
 };
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "INPUT CHANGE":
@@ -30,18 +29,11 @@ const reducer = (state, action) => {
       };
     case "CLEAR VALUE":
       return messageForm;
-    case "CHECK TOGGLE":
-      return {
-        ...state,
-        checked: !state.checked,
-      };
     case "THROW ERROR":
       return {
         ...state,
         error: action.errorValue,
       };
-    case "ADD USER":
-      return {};
     default:
       return state;
   }
@@ -63,14 +55,14 @@ const LoginContact = () => {
     e.preventDefault();
     validate()
   };
-  
+
   const newMessageSend = async () => {
     await axios
       .post("http://localhost:1337/clientmsgs", {
-        name: newMessage.name,
+        text: newMessage.text,
         phone: newMessage.phone,
         email: newMessage.email,
-        text: newMessage.text,
+        name: newMessage.name,
       })
       .then(function (response) {
         console.log(response);
@@ -86,15 +78,15 @@ const LoginContact = () => {
         type: reducerTypes.throwError,
         errorValue: "e-mail jest wymagany",
       });
-    } else if (
-      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
-        newMessage.email
-      )
-    ) {
-      dispatch({
-        type: reducerTypes.throwError,
-        errorValue: "Zły e-mail",
-      });
+    // } else if (
+    //   !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
+    //     newMessage.email
+    //   )
+    // ) {
+    //   dispatch({
+    //     type: reducerTypes.throwError,
+    //     errorValue: "Zły e-mail",
+    //   });
     } else if (!newMessage.name) {
       dispatch({
         type: reducerTypes.throwError,
@@ -118,7 +110,10 @@ const LoginContact = () => {
     //     errorValue: "zły numer telefonu",
     //   });
     } else {
-      return newMessageSend(), dispatch({ type: reducerTypes.clearValue }), alert('Nowa wiadomość została wysłana');
+      return newMessageSend(),
+      console.log('ok')
+      // dispatch({ type: reducerTypes.clearValue }),
+      // alert('Nowa wiadomość została wysłana');
     };
 }
   console.log(newMessage);
@@ -163,7 +158,9 @@ const LoginContact = () => {
           onChange={handleFormValue}
         />
         <Button onClick={handleSubmit}> Wyślij </Button>
-        {newMessage.error ? <ErrorMessage>{newMessage.error}</ErrorMessage> : null}
+        {newMessage.error ? (
+          <ErrorMessage>{newMessage.error}</ErrorMessage>
+        ) : null}
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
@@ -178,3 +175,4 @@ export default LoginContact;
 
 //FIXME:PHONE WALIDACJA
 //TODO: Rozdzielić funckje on click od formularza
+//TODO: DODAĆ WIADOMOŚĆ ZOSTAŁA WYSŁANA
