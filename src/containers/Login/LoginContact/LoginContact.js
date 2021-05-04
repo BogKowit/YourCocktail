@@ -5,8 +5,11 @@ import { PanelContact, Wrapper } from "../../../assets/template.styles";
 import { Button } from "../../../assets/Buttons.styles";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { SelectFieldRegistration } from "../../../components/SelectField/SelectField";
+import { ErrorMessage } from "../../../assets/adds.styles";
 import axios from "axios";
-const messageForm = {
+
+export const messageForm = {
+  name: "",
   phone: "",
   email: "",
   text: "",
@@ -54,10 +57,17 @@ const LoginContact = () => {
       value: e.target.value,
     });
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    validate()
+  };
+  
+  const newMessageSend = async () => {
     await axios
       .post("http://localhost:1337/clientmsgs", {
+        name: newMessage.name,
         phone: newMessage.phone,
         email: newMessage.email,
         text: newMessage.text,
@@ -69,6 +79,48 @@ const LoginContact = () => {
         console.log(error);
       });
   };
+
+  const validate = () => {
+    if (!newMessage.email) {
+      dispatch({
+        type: reducerTypes.throwError,
+        errorValue: "e-mail jest wymagany",
+      });
+    } else if (
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
+        newMessage.email
+      )
+    ) {
+      dispatch({
+        type: reducerTypes.throwError,
+        errorValue: "Zły e-mail",
+      });
+    } else if (!newMessage.name) {
+      dispatch({
+        type: reducerTypes.throwError,
+        errorValue: "Imię jest wymagane",
+      });
+    } else if (newMessage.name.length < 3) {
+      dispatch({
+        type: reducerTypes.throwError,
+        errorValue: "imię jezt za krótkie",
+      });
+    } else if (!newMessage.phone){
+      dispatch({
+        type: reducerTypes.throwError,
+        errorValue: "Telefon jest wymagany",
+      });
+    // } else if (
+    //   /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(newMessage.phone)
+    // ) {
+    //   dispatch({
+    //     type: reducerTypes.throwError,
+    //     errorValue: "zły numer telefonu",
+    //   });
+    } else {
+      return newMessageSend(), dispatch({ type: reducerTypes.clearValue }), alert('Nowa wiadomość została wysłana');
+    };
+}
   console.log(newMessage);
   return (
     <Wrapper>
@@ -76,9 +128,16 @@ const LoginContact = () => {
         <Welcome>Kontakt</Welcome>
         <Text>
           Witaj Pozagalaktyczny przybyszu, jeśli pragniesz się z nami
-          skontaktować zaprasszamy osobiście do podanego punktu na mapie o
-          adresie: DarkaArka 43-100 Tychy
+          skontaktować zaprasszamy osobiście do wypełnienia ankiety
         </Text>
+        <SelectFieldRegistration
+          type="text"
+          placeholder="Wprowadź swoje imię"
+          value={newMessage.name}
+          name="name"
+          label="Imię:"
+          onChange={handleFormValue}
+        />
         <SelectFieldRegistration
           type="text"
           placeholder="Wprowadź numer telefonu"
@@ -104,6 +163,7 @@ const LoginContact = () => {
           onChange={handleFormValue}
         />
         <Button onClick={handleSubmit}> Wyślij </Button>
+        {newMessage.error ? <ErrorMessage>{newMessage.error}</ErrorMessage> : null}
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
@@ -115,3 +175,6 @@ const LoginContact = () => {
 };
 
 export default LoginContact;
+
+//FIXME:PHONE WALIDACJA
+//TODO: Rozdzielić funckje on click od formularza

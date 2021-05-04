@@ -6,6 +6,7 @@ import { Button } from "../../../assets/Buttons.styles";
 import {  ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
 import axios from "axios"
+import { ErrorMessage } from "../../../assets/adds.styles";
 
 const FormRegistration = {
   name: "",
@@ -13,8 +14,7 @@ const FormRegistration = {
   passwordCheck: "",
   email: "",
   checked: false,
-  error: [],
-  validate: false,
+  error: "",
 };
 
 const reducerTypes = {
@@ -22,9 +22,7 @@ const reducerTypes = {
   clearValue: "CLEAR VALUE",
   checkToggle: "CHECK TOGGLE",
   throwError: "THROW ERROR",
-  addUser: "ADD USER",
 };
-
 const reducer = (state,action) =>{
   switch (action.type) {
     case "INPUT CHANGE":
@@ -33,7 +31,7 @@ const reducer = (state,action) =>{
         [action.field]: action.value,
       };
     case "CLEAR VALUE":
-      return FormRegistration
+      return FormRegistration;
     case "CHECK TOGGLE":
       return {
         ...state,
@@ -44,9 +42,6 @@ const reducer = (state,action) =>{
         ...state,
         error: action.errorValue,
       };
-    case "ADD USER":
-      return{
-      }
     default:
       return state;
   }
@@ -67,26 +62,25 @@ const handleFormValue = (e) => {
   });
 };
 
+const newUser = async () =>{
+    await axios.post("http://localhost:1337/dupas", {
+    name: registerFomValue.name,
+    password: registerFomValue.password,
+    email: registerFomValue.email,
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
 const handleSubmit = async (e) => {
   e.preventDefault()
   validate();
-  /////////////////////////Zakopałem się
-    await axios
-      .post("http://localhost:1337/dupas", {
-        name: registerFomValue.name,
-        password: registerFomValue.password,
-        email: registerFomValue.email,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    dispatch({ type: reducerTypes.clearValue })
-    //setUser(data) local strage
-    //zmiana na panel
-    }
+  }
 
 const validate = () => {
   if (!registerFomValue.email) {
@@ -149,7 +143,13 @@ const validate = () => {
       errorValue: "ZAAKCEPTUJ REGULAMIN",
     });
   }
-  else return console.log('dupa')
+  else return (
+    newUser(),
+    dispatch(
+      { type: reducerTypes.clearValue, },
+      { type: reducerTypes.checkToggle },
+    )
+  );
 };
 
   return (
@@ -193,14 +193,14 @@ const validate = () => {
           <input
             type="checkbox"
             value={registerFomValue.check}
-            onChange={() => dispatch({ type: "CHECK TOGGLE" })}
+            onChange={() => dispatch({ type: reducerTypes.checkToggle })}
           />
         </div>
 
-        <Button onClick={handleSubmit}>
-          Zarejestruj
-        </Button>
-        {registerFomValue.error ? <p>{registerFomValue.error}</p> : null}
+        <Button onClick={handleSubmit}>Zarejestruj</Button>
+        {registerFomValue.error ? (
+          <ErrorMessage>{registerFomValue.error}</ErrorMessage>
+        ) : null}
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
@@ -213,8 +213,9 @@ const validate = () => {
 
 export default LoginRegistration;
 
-//FIXME:NAPRAWIĆ REJESTRACJE NA 1 kliknięcie
+
 //FIXME:NAprawić akceptacje regulamina(reset)
 //TODO: Email-validacja,nazwa użytkownika z obecnymi
 //TODO: Wyświetlanie się więcej niż jednego błedu poprzez validacji
 //TODO: ADD USER przekierowanie na zalogowanego użytkownika
+//TODO: Rozdzielić funckje on click od formularza
