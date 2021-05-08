@@ -3,12 +3,6 @@ import axios from "axios";
 import { Panel, Wrapper } from "../../../assets/template.styles";
 import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { SelectField } from "../../../components/SelectField/SelectField";
-import DropdownCombobox from "./AdminCheckDownList";
-
-
-
-
 
 const AdminCheckUsers = () => {
   const [userData, setUserData] = useState([]);
@@ -27,12 +21,9 @@ const AdminCheckUsers = () => {
         });
     }, []);
 
-
-
   return (
     <Wrapper>
       <Panel>
-        <DropdownCombobox userData={{userData}} />
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Logowania"
