@@ -19,11 +19,6 @@ const AdminHome = () => {
     <Wrapper>
       <Panel>
         <Welcome>Panel administratora</Welcome>
-        {/* <ButtonRoundedFull
-          icon={<BiFileFind />}
-          text="Znajdź użytownika"
-          link="/adminCheckUsers"
-        /> */}
         <ButtonRoundedFull
           icon={<TiMessage />}
           text="Zapytania"

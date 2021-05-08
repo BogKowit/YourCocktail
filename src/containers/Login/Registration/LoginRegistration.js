@@ -23,6 +23,7 @@ const reducerTypes = {
   checkToggle: "CHECK TOGGLE",
   throwError: "THROW ERROR",
 };
+
 const reducer = (state,action) =>{
   switch (action.type) {
     case "INPUT CHANGE":
@@ -67,6 +68,7 @@ const newUser = async () =>{
     name: registerFomValue.name,
     password: registerFomValue.password,
     email: registerFomValue.email,
+    status: 'user'
   })
   .then(function (response) {
     console.log(response);
@@ -145,10 +147,7 @@ const validate = () => {
   }
   else return (
     newUser(),
-    dispatch(
-      { type: reducerTypes.clearValue, },
-      { type: reducerTypes.checkToggle },
-    )
+    dispatch({ type: reducerTypes.clearValue })
   );
 };
 
@@ -216,6 +215,7 @@ export default LoginRegistration;
 
 //FIXME:NAprawić akceptacje regulamina(reset)
 //TODO: Email-validacja,nazwa użytkownika z obecnymi
+
 //TODO: Wyświetlanie się więcej niż jednego błedu poprzez validacji
 //TODO: ADD USER przekierowanie na zalogowanego użytkownika
 //TODO: Rozdzielić funckje on click od formularza

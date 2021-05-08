@@ -1,25 +1,18 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, {useReducer } from "react";
 import axios from "axios";
 import { Panel, Wrapper } from '../../../assets/template.styles'
 import { TiArrowBackOutline } from 'react-icons/ti'
 import { ButtonRounded } from '../../../components/RoundedButton/RoundedButton';
 import { Welcome } from '../../../assets/Login.style';
-import { SelectField } from "../../../components/SelectField/SelectField";
+import { SelectField, SelectFieldRegistration } from "../../../components/SelectField/SelectField";
 import styled from 'styled-components'
 import { Button } from "../../../assets/Buttons.styles";
 
-const SelectLabel = styled.p`
-  margin: 0 0 5px;
-  font-size: 14px;
-`
-const SelectMain = styled.select`
-  margin: 10px;
-`
-const data = {
+const dataUser = {
   firstname: "",
   lastname: "",
-  value: "",
-}
+
+};
 const reducerTypes = {
   inputChange: "INPUT CHANGE",
   clearValue: "CLEAR VALUE",
@@ -35,7 +28,7 @@ const reducer = (state, action) => {
         [action.field]: action.value,
       };
     case "CLEAR VALUE":
-      return messageForm;
+      return dataUser;
     case "CHECK TOGGLE":
       return {
         ...state,
@@ -54,8 +47,13 @@ const reducer = (state, action) => {
 };
 
 const UserData = () => {
-  const [userData, setUserData] = useState();
-  const [newDataState, dispatch] = useReducer(reducer, data);
+  const [newDataState, dispatch] = useReducer(
+    reducer,
+    dataUser
+    );
+
+
+  console.log(newDataState);
 
   const handleFormValue = (e) => {
     dispatch({
@@ -64,6 +62,7 @@ const UserData = () => {
       value: e.target.value,
     });
   };
+
   const newDataUser = async () => {
     await axios
       .post("http://localhost:1337/user-statuses", {
@@ -82,37 +81,32 @@ const UserData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     newDataUser()
-
   };
+
 
   return (
     <Wrapper>
       <Panel>
         <Welcome>Witaj w Panelu użytkownika</Welcome>
-        <SelectField
+        <SelectFieldRegistration
           type="text"
           placeholder="Wprowadz imię"
-          value="firstname"
+          name="firstname"
+          value={newDataState.firstname}
           label="Twoje imię"
           onChange={handleFormValue}
         />
-        <SelectField
+        <SelectFieldRegistration
           type="text"
           placeholder="Wprowadź nazwisko"
-          value="lastname"
+          name="lastname"
+          value={newDataState.lastname}
           label="Twoje nazwisko"
           onChange={handleFormValue}
         />
-        <SelectLabel>Twoja kondycja</SelectLabel>
-        <SelectMain>
-          <option value="1">1 Amator-kanapowy</option>
-          <option value="2">2 Pieszy </option>
-          <option value="3">3 Biegacz rekreacyjny </option>
-          <option value="4">4 Biegacz amator </option>
-          <option value="5">5 Biegacz zawodowiec</option>
-        </SelectMain>
 
         <Button onClick={handleSubmit}> Wyślij </Button>
+
         <ButtonRounded
           icon={<TiArrowBackOutline />}
           text="Powrót do panelu Użytkownika"
@@ -125,4 +119,3 @@ const UserData = () => {
 
 export default UserData
 
-//FIXME: JEŚLI USER MA PRZYPIĘTE DANE IMIĘ I NAZISKO POJAWIA SIĘ W PANELU

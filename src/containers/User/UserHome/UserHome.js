@@ -25,26 +25,27 @@ const Home = () => {
       <Panel>
         <Welcome>Witaj użytkowniku</Welcome>
 
-        <ButtonRoundedFull
-          icon={<GrMap />}
-          text="Trasa biegu"
-          link="/userMap" />
+        <ButtonRoundedFull icon={<GrMap />} text="Topic 1" link="/userMap" />
         <ButtonRoundedFull
           icon={<BiUserCircle />}
-          text="Profil ażytkownika"
-          link="/userData" />
+          text="Topic 1"
+          link="/userData"
+        />
         <ButtonRoundedFull
           icon={<RiSurveyLine />}
-          text="Quiz"
-          link="/userQuiz" />
+          text="Topic 1"
+          link="/userQuiz"
+        />
         <ButtonRoundedFull
           icon={<RiTeamFill />}
-          text="Twoja drużyna"
-          link="/userData" />
+          text="Twoja Topic 1"
+          link="/userData"
+        />
         <ButtonRoundedFull
           icon={<MdAddAPhoto />}
-          text="Dodaj zdjęcie"
-          link="/useraddphoto" />
+          text="Dodaj Topic 1"
+          link="/useraddphoto"
+        />
         <Button onClick={(e) => handleLogout(e)}>Wyloguj</Button>
       </Panel>
     </Wrapper>

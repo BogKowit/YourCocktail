@@ -45,7 +45,7 @@ export const WrapperDiv = styled.div`
 export const Welcome = styled.p`
   opacity: 0.7;
   font-size: 20px;
-  margin: 35px 0 18px;
+  margin: 20px 0 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 `;
 

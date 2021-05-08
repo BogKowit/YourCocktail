@@ -8,28 +8,21 @@ import LoginContact from './containers/Login/LoginContact/LoginContact.js';
 import AdminHome from './containers/Admin/AdminHome/AdminHome';
 import AdminCheckUsers from './containers/Admin/AdminCheckUsers/AdminCheckUsers';
 import AdminMessage from './containers/Admin/AdminMessage/AdminMessage';
-import AdminUserStatus from './containers/Admin/AdminUserStatus/AdminUserStatus';
 import AdminChangeUserStatus from './containers/Admin/AdminChangeStatusUser/AdminChangeStatusUser';
 import Board from './containers/Board/Board';
 import UserHome from './containers/User/UserHome/UserHome';
-import UserAddPhoto from './containers/User/UserAddPhoto/UserAddPhoto';
 import UserData from './containers/User/UserData/UserData';
-import UserMap from './containers/User/UserMap/UserMap';
-import UserQuiz from './containers/User/UserQuiz/UserQuiz';
-import UserTeam from './containers/User/UserTeam/UserTeam';
-import Home from './containers/User/UserHome/UserHome.js';
 import NotFound from './components/Navigation/NotFound';
 import GlobalStyle from './assets/global.style';
 import { IconContext } from 'react-icons/lib';
-////////////////////
-import AdminDeleteUser from './components/AdminPanel/AdminDeleteUser/AdminDeleteUser'
 export const UserContext = createContext(null);
 
 
 //TODO: GLobalnie dla admina deleteuser
 
 const App = () => {
-  const [user, setUser] = useState(localStorage.getItem('user'));
+  const [user, setUser] = useState(localStorage.getItem('data'));
+  console.log(user)
 
   return(
     <IconContext.Provider value={{ className: 'react-icons' }}>
@@ -38,24 +31,21 @@ const App = () => {
       <GlobalStyle />
       <Navigation />
         <Switch>
-          <Route exact path='/'><Redirect to={user ? '/home' : '/login'} /></Route>
-          <Route path='/home' ><Home /></Route>
+          <Route exact path='/'>
+            <Redirect to={ user === 'admin' ? '/adminHome' : '/login'} />
+            <Redirect to={ user === 'user' ? '/userHome' : '/login'} />
+          </Route>
           <Route path='/login' ><LoginPanel /></Route>
           <Route path='/register'><LoginRegistration /></Route>
           <Route path='/passwordReset'><LoginPasswordReset /></Route>
           <Route path='/contact'><LoginContact /></Route>
           <Route path='/adminHome'><AdminHome /></Route>
           <Route path='/adminMessage'><AdminMessage /></Route>
-          <Route path='/adminUserStatus'><AdminUserStatus /></Route>
           <Route path='/adminCheckUsers'><AdminCheckUsers /></Route>
           <Route path='/adminChangeUserStatus'><AdminChangeUserStatus /></Route>
           <Route path='/board'> <Board /></Route>
           <Route path='/userHome'><UserHome /></Route>
-          <Route path='/userAddPhoto'><UserAddPhoto /></Route>
           <Route path='/userData'><UserData /></Route>
-          <Route path='/userMap'><UserMap /></Route>
-          <Route path='/userQuiz'><UserQuiz /></Route>
-          <Route path='/userTeam'><UserTeam /></Route>
           <Route path='*' component={NotFound} />
         </Switch>
     </Router>
@@ -65,3 +55,6 @@ const App = () => {
 }
 
 export default App;
+
+//FIXME: Zmienić Redirect by działał
+//TODO: Dowiedzieć się jak i dorobić zabezpieczcenia

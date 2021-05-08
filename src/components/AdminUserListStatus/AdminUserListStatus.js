@@ -13,10 +13,6 @@ import { BiUserX, BiUserCheck } from "react-icons/bi";
   overflow-y: scroll;
   height: 60%;
 `;
-
-
-//TODO:https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
-
   const ListUser = styled.li`
     background-color: rgba(20, 88, 88, 0.3);
     border-radius: 10px;
@@ -52,7 +48,7 @@ import { BiUserX, BiUserCheck } from "react-icons/bi";
       </>
     );
   };
-  
+
 const AdminUserListStatus = () => {
   const [userData, setUserData] = useState([]);
 
@@ -92,6 +88,7 @@ const AdminUserListStatus = () => {
     width: 1px;
   `;
 
+  //https://www.emgoto.com/react-search-bar/
   const SearchBar = () => (
     <form action="/" method="get">
       <label htmlFor="header-search">
@@ -101,11 +98,10 @@ const AdminUserListStatus = () => {
       <button type="submit">Search</button>
     </form>
   );
-  const Search = () => {};
-  //https://www.emgoto.com/react-search-bar/
+
   return (
     <UserStatus>
-      {/* <SearchBar  */}
+      <SearchBar />
       {userData.map((v) => (
         <ListUser key={v.id}>
           <ListUserLine>

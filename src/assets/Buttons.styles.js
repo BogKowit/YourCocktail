@@ -24,11 +24,3 @@ export const Button = styled.button`
     outline: none;
   }
 `;
-
-  // export const ButtonAdminStyle = styled.button`
-  //   width: 30px;
-  //   height: 30px;
-  //   background-color: ${({ color }) =>
-  //     color == "activeUser" ? "green" : "red"};
-  //   border-radius: 50%;
-  // `;

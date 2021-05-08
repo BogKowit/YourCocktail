@@ -10,8 +10,8 @@ export const Wrapper = styled.div`
 
 export const Panel = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
-  width: 300px;
-  height: 350px;
+  width: 90vw;
+  height: 90vh;
   border-radius: 25px;
   box-shadow: 20px;
   display: flex;

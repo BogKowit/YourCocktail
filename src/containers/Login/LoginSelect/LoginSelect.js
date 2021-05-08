@@ -1,45 +1,53 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, } from "react";
+import { useHistory } from "react-router-dom";
 import {WrapperDiv, Welcome } from "../../../assets/Login.style";
 import { SelectField } from "../../../components/SelectField/SelectField";
 import { ButtonRounded } from '../../../components/RoundedButton/RoundedButton';
 import { Button } from "../../../assets/Buttons.styles";
+import { Wrapper, Panel } from "../../../assets/template.styles";
 import { BsChatDots, BsQuestionCircle } from "react-icons/bs";
+import { ErrorMessage } from "../../../assets/adds.styles";
 import { FiUserPlus } from "react-icons/fi";
-import { Wrapper, PanelLogin } from "../../../assets/template.styles";
 import axios from 'axios'
-
 
 const LoginSelect = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [dataUser, setDataUser] = useState("");
   const [error, setError] = useState("");
+  let history = useHistory ();
+
   useEffect(() => {
     axios
       .get("http://localhost:1337/dupas")
       .then((response) => {
-        // console.log(response);
-        const data = response.data;
-        setDataUser(data);
+        setDataUser(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const dupa = () => {
+  const LoginVerification = (e) => {
+    e.preventDefault()
     const userFound = dataUser.filter(
-      (user) =>
-      user.name === username &&
-      user.password === password
+      (user) => user.name === username && user.password === password
     );
     if (userFound.length > 0) {
-      console.log("udało się");
-    } else setError('No DUPA, spróbój ponownie')}
+      userFound.map((user) =>
+        user.status === "admin"
+          ? (localStorage.setItem("data", user.status),
+              history.push("/adminHome"))
+          : (localStorage.setItem("data", user.status),
+              history.push("/board"))
+      );
+    }
+    else setError('coś poszło nie tak')
+  }
 
   return (
     <Wrapper>
-      <PanelLogin>
+      <Panel>
         <Welcome> Witaj Użytkowniku</Welcome>
         <SelectField
           type="text"
@@ -55,10 +63,8 @@ const LoginSelect = () => {
           label="Hasło:"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {/* //////////////////////////////////////////////////////////// */}
-        <Button onClick={(e) => dupa(e)}>Zaloguj</Button>
-        {error}
-        {/* //////////////////////////////////////////////////////////// */}
+        <Button onClick={(e) => LoginVerification(e)}>Zaloguj</Button>
+        {error ? <ErrorMessage>{error}</ErrorMessage> : null}
         <ButtonRounded
           icon={<FiUserPlus />}
           text="Zarejestruj użytkownika."
@@ -76,12 +82,9 @@ const LoginSelect = () => {
             link="/contact"
           />
         </WrapperDiv>
-      </PanelLogin>
+      </Panel>
     </Wrapper>
   );
 }
 
 export default LoginSelect;
-
-//TODO:DODAĆ Add user => localStorage;
-//TODO:DODAĆ Add panel change to login;
