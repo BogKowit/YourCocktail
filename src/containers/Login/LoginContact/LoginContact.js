@@ -1,11 +1,10 @@
-import React, {useReducer, useState} from "react";
-import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
-import { Text, Welcome } from "../../../assets/Login.style";
-import { PanelContact, Wrapper } from "../../../assets/template.styles";
-import { Button } from "../../../assets/Buttons.styles";
+import React, {useReducer} from "react";
+import { ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
+import { LoginContactText, Welcome } from "../../../assets/Login.style";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { SelectFieldRegistration } from "../../../components/SelectField/SelectField";
+import { Field } from "../../../components/SelectField/SelectField";
 import { ErrorMessage } from "../../../assets/adds.styles";
+import { TopText } from "../../../components/Other/Other";
 import axios from "axios";
 
 const messageForm = {
@@ -50,7 +49,6 @@ const LoginContact = () => {
     });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     validate()
@@ -72,107 +70,91 @@ const LoginContact = () => {
       });
   };
 
+  const dispatchProps = (text) => {
+    dispatch({
+      type: reducerTypes.throwError,
+      errorValue: `${text}`,
+    });
+  };
+  
   const validate = () => {
     if (!newMessage.email) {
-      dispatch({
-        type: reducerTypes.throwError,
-        errorValue: "e-mail jest wymagany",
-      });
+      dispatchProps("E-mail is required");
     // } else if (
     //   !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
     //     newMessage.email
     //   )
     // ) {
-    //   dispatch({
-    //     type: reducerTypes.throwError,
-    //     errorValue: "Zły e-mail",
-    //   });
+      dispatchProps("Bad email");
     } else if (!newMessage.name) {
-      dispatch({
-        type: reducerTypes.throwError,
-        errorValue: "Imię jest wymagane",
-      });
+      dispatchProps("Bad First name is required");
     } else if (newMessage.name.length < 3) {
-      dispatch({
-        type: reducerTypes.throwError,
-        errorValue: "imię jezt za krótkie",
-      });
+      dispatchProps("The name is too short");
     } else if (!newMessage.phone){
-      dispatch({
-        type: reducerTypes.throwError,
-        errorValue: "Telefon jest wymagany",
-      });
-    // } else if (
-    //   /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(newMessage.phone)
-    // ) {
-    //   dispatch({
-    //     type: reducerTypes.throwError,
-    //     errorValue: "zły numer telefonu",
-    //   });
-    } else {
-      return newMessageSend(),
-      console.log('ok')
-      // dispatch({ type: reducerTypes.clearValue }),
-      // alert('Nowa wiadomość została wysłana');
-    };
+      dispatchProps("Telephone is required");
+      } else if (/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/(newMessage.phone)) {
+        dispatchProps("wrong phone number");
+      } else {
+        return newMessageSend(), console.log("ok");
+        // dispatch({ type: reducerTypes.clearValue }),
+        // alert('Nowa wiadomość została wysłana');
+      };
 }
   console.log(newMessage);
   return (
-    <Wrapper>
-      <PanelContact>
-        <Welcome>Kontakt</Welcome>
-        <Text>
-          Witaj Pozagalaktyczny przybyszu, jeśli pragniesz się z nami
-          skontaktować zaprasszamy osobiście do wypełnienia ankiety
-        </Text>
-        <SelectFieldRegistration
+    <>
+        <TopText text="Registration Panel" />
+        <LoginContactText>
+          Hello, if you have any questions. Fill in the form
+        </LoginContactText>
+        <Field
           type="text"
-          placeholder="Wprowadź swoje imię"
+          placeholder="Please enter your name"
           value={newMessage.name}
           name="name"
-          label="Imię:"
+          label="Name:"
           onChange={handleFormValue}
         />
-        <SelectFieldRegistration
+        <Field
           type="text"
-          placeholder="Wprowadź numer telefonu"
+          placeholder="Please enter your phone number"
           value={newMessage.phone}
           name="phone"
-          label="Numer Telefonu:"
+          label="Phone number:"
           onChange={handleFormValue}
         />
-        <SelectFieldRegistration
+        <Field
           type="text"
-          placeholder="Wprowadź e-mail"
+          placeholder="Please enter your e-mail"
           value={newMessage.email}
           name="email"
-          label="E-mail"
+          label="E-mail:"
           onChange={handleFormValue}
         />
-        <SelectFieldRegistration
+        <Field
           name="text"
           type="textarea"
-          placeholder="Twoja wiadomość"
+          placeholder="Your message"
           value={newMessage.text}
-          label="twoja wiadomość"
+          label="Your message:"
           onChange={handleFormValue}
         />
-        <Button onClick={handleSubmit}> Wyślij </Button>
+        <ButtonClick onClick={handleSubmit} text="Send" />
         {newMessage.error ? (
           <ErrorMessage>{newMessage.error}</ErrorMessage>
         ) : null}
         <ButtonRounded
           icon={<TiArrowBackOutline />}
-          text="Powrót do panelu Logowania"
+          text="Back to login panel"
           link="/login"
         />
-      </PanelContact>
-    </Wrapper>
+    </>
   );
 };
 
 export default LoginContact;
 
 //FIXME:PHONE WALIDACJA
-//TODO: Rozdzielić funckje on click od formularza
+
 //TODO: DODAĆ WIADOMOŚĆ ZOSTAŁA WYSŁANA
+//TODO: Zwiększyć height formularza

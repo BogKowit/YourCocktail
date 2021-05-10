@@ -16,8 +16,11 @@ const Navigation = () => {
       <StyledLink to="./board" activeClassName="active-link">
         Board
       </StyledLink>
+      <StyledLink to="./findsYourCocktail" activeClassName="active-link">
+        FindsYourCocktail
+      </StyledLink>
     </Wrapper>
   );
 };
 
-export default Navigation;
+export default Navigation; 

@@ -1,10 +1,14 @@
 import React from 'react'
+import { Button } from '../../assets/Buttons.styles';
 import {
   LinkTo,
   LinkWrapper,
   LinkWrapperFull,
   LinkToMiddle,
 } from "../../assets/Login.style";
+
+export const ButtonClick = ({ text,onClick }) => 
+<Button onClick={(e)=>{onClick(e)}}>{text}</Button>;
 
 export const ButtonRounded = ({ icon, text, link }) => {
   return (

@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useReducer, } from "react";
+import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
-import {WrapperDiv, Welcome } from "../../../assets/Login.style";
+import { WrapperLoginPanel } from "../../../assets/Login.style";
 import { SelectField } from "../../../components/SelectField/SelectField";
-import { ButtonRounded } from '../../../components/RoundedButton/RoundedButton';
-import { Button } from "../../../assets/Buttons.styles";
-import { Wrapper, Panel } from "../../../assets/template.styles";
+import { ButtonClick, ButtonRounded } from '../../../components/RoundedButton/RoundedButton';
 import { BsChatDots, BsQuestionCircle } from "react-icons/bs";
 import { ErrorMessage } from "../../../assets/adds.styles";
 import { FiUserPlus } from "react-icons/fi";
+import { TopText } from "../../../components/Other/Other";
 import axios from 'axios'
 
 const LoginSelect = () => {
@@ -36,54 +35,50 @@ const LoginSelect = () => {
     if (userFound.length > 0) {
       userFound.map((user) =>
         user.status === "admin"
-          ? (localStorage.setItem("data", user.status),
-              history.push("/adminHome"))
-          : (localStorage.setItem("data", user.status),
-              history.push("/board"))
+          ? (localStorage.setItem("data", user.id), history.push("/adminHome"))
+          : (localStorage.setItem("data", user.id), history.push("/userHome"))
       );
     }
     else setError('coś poszło nie tak')
   }
 
   return (
-    <Wrapper>
-      <Panel>
-        <Welcome> Witaj Użytkowniku</Welcome>
-        <SelectField
-          type="text"
-          placeholder="Wprowadź nazwę"
-          value="name"
-          label="Nazwa:"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <SelectField
-          type="password"
-          placeholder="Wprowadź hasło"
-          value="password"
-          label="Hasło:"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button onClick={(e) => LoginVerification(e)}>Zaloguj</Button>
-        {error ? <ErrorMessage>{error}</ErrorMessage> : null}
+    <>
+      <TopText text="Hello User" />
+      <SelectField
+        type="text"
+        placeholder="Enter a name"
+        value="name"
+        label="Name:"
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <SelectField
+        type="password"
+        placeholder="Enter your password"
+        value="password"
+        label="Password:"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <ButtonClick text="Login" onClick={LoginVerification} />
+      {error ? <ErrorMessage>{error}</ErrorMessage> : null}
+      <ButtonRounded
+        icon={<FiUserPlus />}
+        text="Register the user."
+        link="/register"
+      />
+      <WrapperLoginPanel>
         <ButtonRounded
-          icon={<FiUserPlus />}
-          text="Zarejestruj użytkownika."
-          link="/register"
+          icon={<BsQuestionCircle />}
+          text="Remind password"
+          link="/passwordReset"
         />
-        <WrapperDiv>
-          <ButtonRounded
-            icon={<BsQuestionCircle />}
-            text="Zapomniałeś Hasła"
-            link="/passwordReset"
-          />
-          <ButtonRounded
-            icon={<BsChatDots />}
-            text="Skontaktuj się z nami!"
-            link="/contact"
-          />
-        </WrapperDiv>
-      </Panel>
-    </Wrapper>
+        <ButtonRounded
+          icon={<BsChatDots />}
+          text="Contact with us!"
+          link="/contact"
+        />
+      </WrapperLoginPanel>
+    </>
   );
 }
 

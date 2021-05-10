@@ -36,7 +36,7 @@ export const LinkWrapperFull =styled(LinkWrapper)`
   justify-content: center;
 `
 
-export const WrapperDiv = styled.div`
+export const WrapperLoginPanel = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 15px;
@@ -49,7 +49,7 @@ export const Welcome = styled.p`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
-export const Text = styled.p`
+export const LoginContactText = styled.p`
   width: 80%;
   font-size: 12px;
   margin: 6px;

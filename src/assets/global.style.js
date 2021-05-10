@@ -23,7 +23,9 @@ const GlobalStyle = createGlobalStyle`
     
     font-family: "Montserrat", sans-serif;
   }
-
+  ul, li{
+    list-style: none;
+  }
   *, *::after, *::before{
     box-sizing: inherit;
   }

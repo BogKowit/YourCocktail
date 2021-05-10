@@ -1,12 +1,11 @@
-import React, {useState, useEffect, useReducer} from "react";
-import { Welcome } from "../../../assets/Login.style";
-import { PanelRegistration, Wrapper } from "../../../assets/template.styles";
-import { SelectFieldRegistration } from "../../../components/SelectField/SelectField";
-import { Button } from "../../../assets/Buttons.styles";
-import {  ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
-import { TiArrowBackOutline } from "react-icons/ti";
-import axios from "axios"
+import React, {useReducer} from "react";
+import { Field, FieldToggle } from "../../../components/SelectField/SelectField";
+import {  ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
+import { TopText } from "../../../components/Other/Other";
 import { ErrorMessage } from "../../../assets/adds.styles";
+import { TiArrowBackOutline } from "react-icons/ti";
+import { useHistory } from "react-router-dom";
+import axios from "axios"
 
 const FormRegistration = {
   name: "",
@@ -53,7 +52,8 @@ const LoginRegistration = () => {
     reducer,
     FormRegistration
     );
-console.log(registerFomValue);
+    let history = useHistory();
+
 
 const handleFormValue = (e) => {
   dispatch({
@@ -70,143 +70,109 @@ const newUser = async () =>{
     email: registerFomValue.email,
     status: 'user'
   })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
+}
+
+const dispatchProps = (text) =>{
+  dispatch({
+    type: reducerTypes.throwError,
+    errorValue: `${text}`
   });
 }
 
-
-const handleSubmit = async (e) => {
+const handleSubmit = (e) => {
   e.preventDefault()
   validate();
   }
 
 const validate = () => {
   if (!registerFomValue.email) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "e-mail jest wymagany",
-    });
+    dispatchProps("e-mail is required");
   } else if (
     !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
-      registerFomValue.email
-    )
+      registerFomValue.email)
   ) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "Zły e-mail",
-    });
+    dispatchProps("Bad e-mail");
   }
   else if (!registerFomValue.name) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "Imię jest wymagane",
-    });
+    dispatchProps("Name is required");
   } else if (registerFomValue.name.length < 3) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "imię jezt za krótkie",
-    });
+    dispatchProps("Name is too short");
   }
   else if (!registerFomValue.password) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "hasło jest wymagane",
-    });
+    dispatchProps("password is required");
   } else if (registerFomValue.password.length < 5) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "hasło jest za krótkie",
-    });
+    dispatchProps("password is too short");
   }
   else if (!registerFomValue.passwordCheck) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "Powtórzenie hasła jest wymagane",
-    });
+    dispatchProps("Repeat password is required");
   } else if (registerFomValue.passwordCheck.length < 5) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "Powtórzone hasło jest za krótkie",
-    });
+    dispatchProps("Repeat password is too short");
   }
   else if (registerFomValue.password !== registerFomValue.passwordCheck) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "Hasła się różnią",
-    });
+    dispatchProps("Passwords vary");
   }
   else if (!registerFomValue.checked) {
-    dispatch({
-      type: reducerTypes.throwError,
-      errorValue: "ZAAKCEPTUJ REGULAMIN",
-    });
+    dispatchProps("accept the Statement");
   }
   else return (
     newUser(),
-    dispatch({ type: reducerTypes.clearValue })
+    dispatch({ type: reducerTypes.clearValue }),
+    alert("User registered"),
+    history.push("/")
   );
 };
 
   return (
-    <Wrapper>
-      <PanelRegistration>
-        <Welcome>Panel Rejestracyjny</Welcome>
-        <SelectFieldRegistration
-          type="text"
-          placeholder="Wprowadź nazwę"
-          name="name"
-          value={registerFomValue.name}
-          label="Nazwa:"
-          onChange={handleFormValue}
-        />
-        <SelectFieldRegistration
-          type="password"
-          placeholder="Wprowadź hasło"
-          name="password"
-          value={registerFomValue.password}
-          label="Hasło:"
-          onChange={handleFormValue}
-        />
-        <SelectFieldRegistration
-          type="password"
-          placeholder="Wprowadź ponownie hasło"
-          name="passwordCheck"
-          value={registerFomValue.passwordCheck}
-          label="Ponownie hasło:"
-          onChange={handleFormValue}
-        />
-        <SelectFieldRegistration
-          type="email"
-          placeholder="Wprowadź e-mail"
-          name="email"
-          value={registerFomValue.email}
-          label="E-mail kontaktowy:"
-          onChange={handleFormValue}
-        />
-        <div>
-          <label>Akceptuję regulamin rejestracji</label>
-          <input
-            type="checkbox"
-            value={registerFomValue.check}
-            onChange={() => dispatch({ type: reducerTypes.checkToggle })}
-          />
-        </div>
-
-        <Button onClick={handleSubmit}>Zarejestruj</Button>
-        {registerFomValue.error ? (
-          <ErrorMessage>{registerFomValue.error}</ErrorMessage>
-        ) : null}
-        <ButtonRounded
-          icon={<TiArrowBackOutline />}
-          text="Powrót do panelu Logowania"
-          link="/login"
-        />
-      </PanelRegistration>
-    </Wrapper>
+    <>
+      <TopText text="Registration Panel" />
+      <Field
+        type="text"
+        placeholder="Enter a name"
+        name="name"
+        value={registerFomValue.name}
+        label="Name:"
+        onChange={handleFormValue}
+      />
+      <Field
+        type="password"
+        placeholder="Enter your password"
+        name="password"
+        value={registerFomValue.password}
+        label="Password:"
+        onChange={handleFormValue}
+      />
+      <Field
+        type="password"
+        placeholder="Re-enter the password"
+        name="passwordCheck"
+        value={registerFomValue.passwordCheck}
+        label="Password again:"
+        onChange={handleFormValue}
+      />
+      <Field
+        type="email"
+        placeholder="Enter e-mail"
+        name="email"
+        value={registerFomValue.email}
+        label="E-mail:"
+        onChange={handleFormValue}
+      />
+      <FieldToggle
+        text="I declare that `I am over 18 years old`"
+        type="checkbox"
+        value={registerFomValue.check}
+        onChange={() => dispatch({ type: reducerTypes.checkToggle })}
+      />
+      <ButtonClick text="Register" onClick={handleSubmit} />
+      {registerFomValue.error ? (
+        <ErrorMessage>{registerFomValue.error}</ErrorMessage>
+      ) : null}
+      <ButtonRounded
+        icon={<TiArrowBackOutline />}
+        text="Powrót do panelu Logowania"
+        link="/login"
+      />
+    </>
   );
 };
 
@@ -214,8 +180,4 @@ export default LoginRegistration;
 
 
 //FIXME:NAprawić akceptacje regulamina(reset)
-//TODO: Email-validacja,nazwa użytkownika z obecnymi
-
 //TODO: Wyświetlanie się więcej niż jednego błedu poprzez validacji
-//TODO: ADD USER przekierowanie na zalogowanego użytkownika
-//TODO: Rozdzielić funckje on click od formularza

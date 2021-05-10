@@ -2,20 +2,18 @@ import React from 'react';
 import { Welcome } from "../../../assets/Login.style";
 import {Panel, Wrapper} from '../../../assets/template.styles';
 import { Button } from "../../../assets/Buttons.styles"
-import { ButtonRounded, ButtonRoundedFull } from "../../../components/RoundedButton/RoundedButton";
-import { GrMap } from "react-icons/gr"
-import { BiUserCircle } from "react-icons/bi"
+import { ButtonRoundedFull } from "../../../components/RoundedButton/RoundedButton";
 import { RiSurveyLine, RiTeamFill } from "react-icons/ri";
 import { MdAddAPhoto} from "react-icons/md"
-
-
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
+let history = useHistory();
 
     const handleLogout = (event) =>{
-      localStorage.removeItem('user');
       event.preventDefault()
-      window.location.href = "/";
+      localStorage.removeItem('data');
+      history.push("/");
   }
 
   //TODO: Witaj zmienić na login użytkownika
@@ -24,27 +22,20 @@ const Home = () => {
     <Wrapper>
       <Panel>
         <Welcome>Witaj użytkowniku</Welcome>
-
-        <ButtonRoundedFull icon={<GrMap />} text="Topic 1" link="/userMap" />
-        <ButtonRoundedFull
-          icon={<BiUserCircle />}
-          text="Topic 1"
-          link="/userData"
-        />
         <ButtonRoundedFull
           icon={<RiSurveyLine />}
-          text="Topic 1"
-          link="/userQuiz"
+          text="Find Cocktail"
+          link="/findsYourCocktail"
         />
         <ButtonRoundedFull
           icon={<RiTeamFill />}
-          text="Twoja Topic 1"
-          link="/userData"
+          text="Daily random cocktail"
+          link="/randomCocktail"
         />
         <ButtonRoundedFull
           icon={<MdAddAPhoto />}
-          text="Dodaj Topic 1"
-          link="/useraddphoto"
+          text="Your best Cocktail"
+          link="/yourFavoriteCocktail"
         />
         <Button onClick={(e) => handleLogout(e)}>Wyloguj</Button>
       </Panel>
