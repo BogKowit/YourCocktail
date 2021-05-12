@@ -18,6 +18,8 @@ export const WrapperIngredient = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 120px;
+  height: 300px;
   & > p {
     margin: 0;
     text-align: center;
@@ -41,14 +43,9 @@ export const HowToDo = styled.p`
   }
 `;
 export const WrapperAllIngredients = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  @media (max-width: 520px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media (max-width: 460px) {
-    grid-template-columns: 1fr 1fr;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
 `;
 
 export const IngredientPhoto = styled.img`
