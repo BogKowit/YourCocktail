@@ -16,11 +16,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    height: 100%;
+    height: 100vh;
     background: linear-gradient(222deg,
         rgba(34,193,195,1) 0%,
         rgba(235,45,253,1) 100%);
-    
+    display: flex;
+    align-items:center;
+    justify-content:center;
     font-family: "Montserrat", sans-serif;
   }
   ul, li{

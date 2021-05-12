@@ -1,43 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from "styled-components";
-import { BiUserX, BiUserCheck } from "react-icons/bi";
-// import { ButtonAdminStyle } from '../../assets/Buttons.styles';
+import { BiUserX, } from "react-icons/bi";
+import {UserStatus,ListUser,ListUserLine,UserColumn,UserData, ButtonAdminStyle} from "./AdminUserListStatus.style.js"
 
-
-  const UserStatus = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 12px;
-  overflow-y: scroll;
-  height: 60%;
-`;
-  const ListUser = styled.li`
-    background-color: rgba(20, 88, 88, 0.3);
-    border-radius: 10px;
-    padding: 5px;
-    margin: 2px;
-    border: 1px solid grey;
-  `;
-  const ListUserLine = styled.div`
-    display: flex;
-    margin: 0px;
-    padding: 0px;
-  `;
-  const UserColumn = styled.p`
-  margin: 1px 0;
-  `;
-  const UserData = styled.p`
-  margin: 1px 0;
-  `
-  const ButtonAdminStyle = styled.button`
-    width: 30px;
-    height: 30px;
-    background-color: ${({ color }) =>
-      color == "activeUser" ? "green" : "red"};
-    border-radius: 50%;
-  `;
   const ButtonAdmin = ({ text, onClick, color, icon}) => {
     return (
       <>
@@ -76,32 +42,12 @@ const AdminUserListStatus = () => {
       .catch((err) => {
         console(err);
       });
+    const newListUser = userData.filter((user) => user.id !== id);
+    setUserData(newListUser);
   };
-
-  const SearchBarTitle = styled.div`
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-  `;
-
-  //https://www.emgoto.com/react-search-bar/
-  const SearchBar = () => (
-    <form action="/" method="get">
-      <label htmlFor="header-search">
-        <SearchBarTitle>Wyszukaj użytkownika</SearchBarTitle>
-      </label>
-      <input type="text" id="header-search" placeholder="Wyszkuj se" name="s" />
-      <button type="submit">Search</button>
-    </form>
-  );
 
   return (
     <UserStatus>
-      <SearchBar />
       {userData.map((v) => (
         <ListUser key={v.id}>
           <ListUserLine>

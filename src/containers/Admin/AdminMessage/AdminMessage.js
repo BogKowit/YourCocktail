@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import { Panel, Wrapper } from "../../../assets/template.styles";
 import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { TiArrowBackOutline } from "react-icons/ti";
 import axios from "axios";
 import styled from "styled-components";
 import { Welcome } from '../../../assets/Login.style';
-import { BiMessageX } from "react-icons/bi"
 
 
   const Messages = styled.ul`
@@ -23,26 +21,43 @@ import { BiMessageX } from "react-icons/bi"
     padding: 5px 10px;
     border-radius: 10px;
     border: 1px solid grey;
+    width: 100%;
+    min-width: 300px;
+    @media (max-width: 410px) {
+      min-width: 270px;}
   `;
 
-  const ButtonAdminStyle = styled.button`
-    width: 30px;
-    height: 30px;
-    background-color: ${({ color }) =>
-      color == "activeUser" ? "green" : "red"};
-    border-radius: 50%;
+  const WrapperMessage = styled.div`
+    display: grid;
+    grid-template-columns: 120px 1fr;
+
+    @media (max-width: 410px) {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+    }
+    > :first-child {
+      border-bottom: 1px solid black;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0;
+      @media (max-width: 410px) {
+        border-bottom: 1px solid grey;
+      }
+    }
   `;
-  const ButtonAdmin = ({ text, onClick, color, icon}) => {
-    return (
-      <>
-        <label>{text}</label>
-        <ButtonAdminStyle onClick={onClick} color={color}>
-          {icon ? icon : null}
-        </ButtonAdminStyle>
-      </>
-    );
-  };
-  
+
+  const Scroll = styled.div`
+    overflow-y: scroll;
+    width: 90%;
+    height: 90%;
+    margin: 10px;
+    background-color: rgba(20, 88, 88, 0.2);
+    padding: 15px;
+    border: 1px solid grey;
+    border-radius: 10px;
+  `;
+
 const AdminMessage = () => {
   const [message, setMessage] = useState([])
 
@@ -58,33 +73,61 @@ const AdminMessage = () => {
       });
   }, [])
 
-  const handleDeleteMessage = () =>{
 
-  }
-  
+  const handleDeleteMessage = (e, id) => {
+    axios
+      .delete(`http://localhost:1337/clientmsgs/${id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console(err);
+      });
+    const newMessageList = message.filter((list) => list.id !== id);
+    setMessage(newMessageList);
+  };
+
   return (
-    <Wrapper>
-      <Panel>
-        <Welcome>Wiadomości</Welcome>
-        <Messages>
-          {message.map((v) => (
-            <SimpleMessage key={v.id}>
-              {v.text}
-              <ButtonAdmin
-                text="Usuń wiadomość"
-                onClick={(e) => handleDeleteMessage(e, v.id)}
-                icon={<BiMessageX />}
-              />
-            </SimpleMessage>
-          ))}
-        </Messages>
-        <ButtonRounded
-          icon={<TiArrowBackOutline />}
-          text="Powrót do panelu Logowania"
-          link="/adminHome"
-        />
-      </Panel>
-    </Wrapper>
+    <>
+      <Welcome>Messages</Welcome>
+    <Scroll>
+      <Messages>
+        {message.map((v) => (
+          <SimpleMessage key={v.id}>
+            <WrapperMessage>
+              <p>Sended:</p>
+              <p>{v.created_at}</p>
+            </WrapperMessage>
+            <WrapperMessage>
+              <p>Message:</p>
+              <p>{v.text}</p>
+            </WrapperMessage>
+            <WrapperMessage>
+              <p>Name:</p>
+              <p>{v.name}</p>
+            </WrapperMessage>
+            <WrapperMessage>
+              <p>Phone contact:</p>
+              <p>{v.phone}</p>
+            </WrapperMessage>
+            <WrapperMessage>
+              <p>E-mail contact:</p>
+              <p>{v.email}</p>
+            </WrapperMessage>
+            <button onClick={(e) => handleDeleteMessage(e, v.id)}>
+              User Delete
+            </button>
+          </SimpleMessage>
+        ))}
+      </Messages>
+      </Scroll>
+      <ButtonRounded
+        icon={<TiArrowBackOutline />}
+        text="Powrót do panelu Logowania"
+        link="/adminHome"
+      />
+      </>
   );
 };
 

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import axios from "axios";
 import { Button } from "../../../assets/Buttons.styles";
 import { Welcome } from "../../../assets/Login.style";
 import { DrinkPicture, WrapperIngredient, WhatACocktail, HowToDo,
 WrapperAllIngredients, IngredientPhoto, DrinkName} from './RandomCocktail.style'
+import { ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 
 const WrapperIngredients = ({ src, ingredient, measure }) => {
   return (
@@ -22,8 +23,10 @@ const WrapperIngredients = ({ src, ingredient, measure }) => {
 };
 const Board = () => {
   const [cocktail, setCocktail] = useState([]);
+  const [buttonText, setButtonText] = useState("Drink for today")
 
   const getRandomDrink = async (name) => {
+    handlerNameButton();
     await axios
       .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
       .then((response) => {
@@ -43,7 +46,6 @@ const Board = () => {
   const addToFavorite = async () => {
     const id = localStorage.getItem("data");
     const idDrink = cocktail.idDrink;
-    console.log(`http://localhost:1337/dupas/${id}`);
     await axios
       .put(`http://localhost:1337/dupas/${id}`, {
         favoriteDrink: idDrink,
@@ -54,18 +56,20 @@ const Board = () => {
       });
   };
 
+  const handlerNameButton = (text) => setButtonText("Another One")
+
   console.log(cocktail);
   return (
     <>
-      <Welcome>Twój drink na dziś</Welcome>
+      <Welcome>Your drink for today</Welcome>
       {cocktail.strDrinkThumb ? (
         <DrinkPicture src={cocktail.strDrinkThumb} alt="Logo" />
       ) : (
         <WhatACocktail>?</WhatACocktail>
       )}
-      <Welcome>Nazwa drinka:</Welcome>
+      <Welcome>Name of the drink:</Welcome>
       <DrinkName>{cocktail.strDrink}</DrinkName>
-      {cocktail.strDrink ? <Welcome>Sposób przygotowania</Welcome> : null}
+      {cocktail.strDrink ? <Welcome>A method of preparing</Welcome> : null}
       <HowToDo>{cocktail.strInstructions}</HowToDo>
       <WrapperAllIngredients>
         <WrapperIngredients
@@ -109,8 +113,9 @@ const Board = () => {
           measure={cocktail.strMeasure8}
         />
       </WrapperAllIngredients>
-      <Button onClick={(e) => addToFavorite(e)}>Dodaj do ulbionych</Button>
-      <Button onClick={(e) => getRandomDrink(e)}>Drink na dziś</Button>
+      <ButtonClick text='Add to favorite' onClick={addToFavorite} />
+      <ButtonClick text={buttonText} onClick={getRandomDrink} />
+      <ButtonRounded text="Back to login panel" link="/UserHome" />
     </>
   );
 };

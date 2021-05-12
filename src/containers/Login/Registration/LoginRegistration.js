@@ -72,7 +72,7 @@ const newUser = async () =>{
   })
 }
 
-const dispatchProps = (text) =>{
+const dispatchPropsError = (text) =>{
   dispatch({
     type: reducerTypes.throwError,
     errorValue: `${text}`
@@ -86,33 +86,33 @@ const handleSubmit = (e) => {
 
 const validate = () => {
   if (!registerFomValue.email) {
-    dispatchProps("e-mail is required");
+    dispatchPropsError("e-mail is required");
   } else if (
     !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
       registerFomValue.email)
   ) {
-    dispatchProps("Bad e-mail");
+    dispatchPropsError("Bad e-mail");
   }
   else if (!registerFomValue.name) {
-    dispatchProps("Name is required");
+    dispatchPropsError("Name is required");
   } else if (registerFomValue.name.length < 3) {
-    dispatchProps("Name is too short");
+    dispatchPropsError("Name is too short");
   }
   else if (!registerFomValue.password) {
-    dispatchProps("password is required");
+    dispatchPropsError("password is required");
   } else if (registerFomValue.password.length < 5) {
-    dispatchProps("password is too short");
+    dispatchPropsError("password is too short");
   }
   else if (!registerFomValue.passwordCheck) {
-    dispatchProps("Repeat password is required");
+    dispatchPropsError("Repeat password is required");
   } else if (registerFomValue.passwordCheck.length < 5) {
-    dispatchProps("Repeat password is too short");
+    dispatchPropsError("Repeat password is too short");
   }
   else if (registerFomValue.password !== registerFomValue.passwordCheck) {
-    dispatchProps("Passwords vary");
+    dispatchPropsError("Passwords vary");
   }
   else if (!registerFomValue.checked) {
-    dispatchProps("accept the Statement");
+    dispatchPropsError("accept the Statement");
   }
   else return (
     newUser(),

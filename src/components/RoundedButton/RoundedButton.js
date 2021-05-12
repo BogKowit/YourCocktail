@@ -7,8 +7,8 @@ import {
   LinkToMiddle,
 } from "../../assets/Login.style";
 
-export const ButtonClick = ({ text,onClick }) => 
-<Button onClick={(e)=>{onClick(e)}}>{text}</Button>;
+export const ButtonClick = ({ text, onClick, value}) => 
+<Button onClick={(e)=>{onClick(e)}} value={value}>{text}</Button>;
 
 export const ButtonRounded = ({ icon, text, link }) => {
   return (

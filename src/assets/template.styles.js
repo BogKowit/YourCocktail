@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
+  max-width: 600px;
+  height: 80%;
 `;
 
 export const Panel = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
   width: 90vw;
-  height: 90vh;
+  height: 80vh;
   border-radius: 25px;
   box-shadow: 20px;
   display: flex;

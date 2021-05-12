@@ -12,20 +12,20 @@ let history = useHistory();
 
     const handleLogout = (event) =>{
       event.preventDefault()
-      localStorage.removeItem('data');
+      localStorage.removeItem('status');
       history.push("/");
   }
 
   //TODO: Witaj zmienić na login użytkownika
 
   return (
-    <Wrapper>
-      <Panel>
+    <>
+
         <Welcome>Witaj użytkowniku</Welcome>
         <ButtonRoundedFull
           icon={<RiSurveyLine />}
           text="Find Cocktail"
-          link="/findsYourCocktail"
+          link="/findYourCocktail"
         />
         <ButtonRoundedFull
           icon={<RiTeamFill />}
@@ -38,8 +38,8 @@ let history = useHistory();
           link="/yourFavoriteCocktail"
         />
         <Button onClick={(e) => handleLogout(e)}>Wyloguj</Button>
-      </Panel>
-    </Wrapper>
+
+    </>
   );
 };
 

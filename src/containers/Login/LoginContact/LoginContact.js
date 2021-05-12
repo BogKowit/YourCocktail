@@ -80,11 +80,11 @@ const LoginContact = () => {
   const validate = () => {
     if (!newMessage.email) {
       dispatchProps("E-mail is required");
-    // } else if (
-    //   !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
-    //     newMessage.email
-    //   )
-    // ) {
+    } else if (
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
+        newMessage.email
+      )
+    ) {
       dispatchProps("Bad email");
     } else if (!newMessage.name) {
       dispatchProps("Bad First name is required");
@@ -92,12 +92,12 @@ const LoginContact = () => {
       dispatchProps("The name is too short");
     } else if (!newMessage.phone){
       dispatchProps("Telephone is required");
-      } else if (/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/(newMessage.phone)) {
-        dispatchProps("wrong phone number");
+      // } else if (/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/(newMessage.phone)) {
+      //   dispatchProps("wrong phone number");
       } else {
-        return newMessageSend(), console.log("ok");
-        // dispatch({ type: reducerTypes.clearValue }),
-        // alert('Nowa wiadomość została wysłana');
+        return newMessageSend(),
+        dispatch({ type: reducerTypes.clearValue }),
+        alert('The new message has been sent');
       };
 }
   console.log(newMessage);

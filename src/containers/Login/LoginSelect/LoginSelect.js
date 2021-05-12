@@ -35,43 +35,45 @@ const LoginSelect = () => {
     if (userFound.length > 0) {
       userFound.map((user) =>
         user.status === "admin"
-          ? (localStorage.setItem("data", user.id), history.push("/adminHome"))
-          : (localStorage.setItem("data", user.id), history.push("/userHome"))
+          ? (localStorage.setItem("data", user.id),
+            localStorage.setItem("status", user.status),
+            history.push("/adminHome"))
+          : (localStorage.setItem("data", user.id),
+            localStorage.setItem("status", user.status),
+            history.push("/userHome"))
       );
     }
-    else setError('coś poszło nie tak')
+    else setError("incorrect password or username");
   }
-
+  console.log(dataUser);
   return (
     <>
       <TopText text="Hello User" />
       <SelectField
         type="text"
         placeholder="Enter a name"
-        value="name"
         label="Name:"
         onChange={(e) => setUsername(e.target.value)}
       />
       <SelectField
         type="password"
         placeholder="Enter your password"
-        value="password"
         label="Password:"
         onChange={(e) => setPassword(e.target.value)}
       />
       <ButtonClick text="Login" onClick={LoginVerification} />
       {error ? <ErrorMessage>{error}</ErrorMessage> : null}
+      <WrapperLoginPanel>
       <ButtonRounded
         icon={<FiUserPlus />}
         text="Register the user."
         link="/register"
       />
-      <WrapperLoginPanel>
-        <ButtonRounded
+        {/* <ButtonRounded
           icon={<BsQuestionCircle />}
           text="Remind password"
           link="/passwordReset"
-        />
+        /> */}
         <ButtonRounded
           icon={<BsChatDots />}
           text="Contact with us!"
