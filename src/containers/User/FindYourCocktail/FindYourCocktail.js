@@ -7,42 +7,31 @@ import { DrinkPicture , PhotoWrapper ,FullWrapper ,Ingredient } from "./FindYour
 import axios from 'axios';
 import { ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 
-
 const FindYourCocktail = () => {
   const [cocktailsFinds, setCocktailsFinds] = useState([]);
   const [findCocktailValue, setFindCocktailValue] = useState({ value: "" });
-    const [error, setError] = useState("");
-
+  const [isLoading, setLoading] = useState(false);
   let history = useHistory();
+
   const getRandomDrink = async () => {
+    setLoading(true);
     findCocktailValue ? (
     await axios
       .get(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${findCocktailValue.name}`
       )
-      .then((response) => setCocktailsFinds(response.data.drinks))
+      .then((response) => {
+        setCocktailsFinds(response.data.drinks)
+        setLoading(false);
+      })
       .catch((response) => console.log(response)))
-   : console.log("first schare");
+      : console.log("first schare");
       }
-  // const Loop = ({v}) => {
-  //   const loop = []
-  //   for (let i = 1; i <= 8; i++) {
-  //     const dupa = join(v.strIngredient, i)
-  //     loop.push(
-  //       v.strIngredient + [i] ? (
-  //         <Ingredient>
-  //           <p>{v.strIngredient1}</p>
-  //           <p>{v.strMeasure1}</p>
-  //         </Ingredient>
-  //       ) : null
-  //     );
-  //     }
-  //   return loop
-  // };
 
   const handleFormValue = (e) => {
     setFindCocktailValue({ [e.target.name]: e.target.value });
   };
+
 
     const addToFavorite = async (e, v) => {
       const id = localStorage.getItem("data");
@@ -57,7 +46,9 @@ const FindYourCocktail = () => {
         });
     };
 
-
+  // const handleKeyPress = () => {
+    // ufconsole.log('dupa')
+  // }
   return (
     <>
       <Welcome>Find your best drink Broo</Welcome>
@@ -68,9 +59,11 @@ const FindYourCocktail = () => {
         name="name"
         label="Imię:"
         onChange={handleFormValue}
+        // onKeyPress={handleKeyDown}
       />
+      {isLoading ? <div>Loading...</div> : (
       <ul>
-        {cocktailsFinds.map((v, i) => (
+        {cocktailsFinds?.map((v, i) => (
           <FullWrapper key={i}>
             <PhotoWrapper>
               <p>{v.strDrink}</p>
@@ -79,7 +72,6 @@ const FindYourCocktail = () => {
             </PhotoWrapper>
             <div>
               <p>Ingredients: </p>
-              {/* <Loop v={v}/> */}
               {v.strIngredient1 ? (
                 <Ingredient>{v.strIngredient1}</Ingredient>
               ) : null}
@@ -108,6 +100,7 @@ const FindYourCocktail = () => {
           </FullWrapper>
         ))}
       </ul>
+      )}
       <Button onClick={getRandomDrink}>Find cocktails</Button>
       <ButtonRounded text="Back to main panel" link="/UserHome" />
     </>

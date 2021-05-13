@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { WrapperLoginPanel } from "../../../assets/Login.style";
 import { SelectField } from "../../../components/SelectField/SelectField";
 import { ButtonClick, ButtonRounded } from '../../../components/RoundedButton/RoundedButton';
@@ -45,7 +45,9 @@ const LoginSelect = () => {
     }
     else setError("incorrect password or username");
   }
-  console.log(dataUser);
+  
+  if (localStorage.getItem('status')==='user') return <Redirect to={'/userHome'} />
+            // <Redirect to={data==='admin'?'/adminHome':'/login'} />
   return (
     <>
       <TopText text="Hello User" />
@@ -69,11 +71,6 @@ const LoginSelect = () => {
         text="Register the user."
         link="/register"
       />
-        {/* <ButtonRounded
-          icon={<BsQuestionCircle />}
-          text="Remind password"
-          link="/passwordReset"
-        /> */}
         <ButtonRounded
           icon={<BsChatDots />}
           text="Contact with us!"

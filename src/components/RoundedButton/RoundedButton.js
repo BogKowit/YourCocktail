@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Button } from '../../assets/Buttons.styles';
 import {
   LinkTo,
@@ -12,10 +13,12 @@ export const ButtonClick = ({ text, onClick, value}) =>
 
 export const ButtonRounded = ({ icon, text, link }) => {
   return (
-    <LinkWrapper>
-      {icon ? icon : null}
-      <LinkTo to={link}>{text}</LinkTo>
-    </LinkWrapper>
+    <Link to={link}>
+      <LinkWrapper>
+        {icon ? icon : null}
+        <div>{text}</div>
+      </LinkWrapper>
+    </Link>
   );
 };
 

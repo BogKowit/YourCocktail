@@ -1,26 +1,11 @@
-import React, { useReducer, useState } from "react";
+import React, {useState } from "react";
 import axios from "axios";
-import { Button } from "../../../assets/Buttons.styles";
 import { Welcome } from "../../../assets/Login.style";
 import { DrinkPicture, WrapperIngredient, WhatACocktail, HowToDo,
 WrapperAllIngredients, IngredientPhoto, DrinkName} from './RandomCocktail.style'
 import { ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
+import WrapperIngredients from "./WrapperIngredients";
 
-const WrapperIngredients = ({ src, ingredient, measure }) => {
-  return (
-    <>
-      {ingredient ? (
-        <WrapperIngredient>
-          <IngredientPhoto src={src} alt="Logo" />
-          <p>składnik:</p>
-          <p>{ingredient}</p>
-          {measure ? <p>proporcje:</p> : null}
-          <p>{measure}</p>
-        </WrapperIngredient>
-      ) : null}
-    </>
-  );
-};
 const Board = () => {
   const [cocktail, setCocktail] = useState([]);
   const [buttonText, setButtonText] = useState("Drink for today")
@@ -56,9 +41,8 @@ const Board = () => {
       });
   };
 
-  const handlerNameButton = (text) => setButtonText("Another One")
+  const handlerNameButton = (text) => setButtonText("Another One");
 
-  console.log(cocktail);
   return (
     <>
       <Welcome>Your drink for today</Welcome>

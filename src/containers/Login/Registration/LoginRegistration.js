@@ -6,15 +6,7 @@ import { ErrorMessage } from "../../../assets/adds.styles";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { useHistory } from "react-router-dom";
 import axios from "axios"
-
-const FormRegistration = {
-  name: "",
-  password: "",
-  passwordCheck: "",
-  email: "",
-  checked: false,
-  error: "",
-};
+import { formRegistration } from "../../../utils/forms";
 
 const reducerTypes = {
   inputChange: "INPUT CHANGE",
@@ -31,7 +23,7 @@ const reducer = (state,action) =>{
         [action.field]: action.value,
       };
     case "CLEAR VALUE":
-      return FormRegistration;
+      return formRegistration;
     case "CHECK TOGGLE":
       return {
         ...state,
@@ -50,7 +42,7 @@ const reducer = (state,action) =>{
 const LoginRegistration = () => {
   const [registerFomValue, dispatch] = useReducer(
     reducer,
-    FormRegistration
+  formRegistration
     );
     let history = useHistory();
 

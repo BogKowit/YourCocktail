@@ -19,12 +19,13 @@ export const TextAreaField = ({ type, value, label, placeholder, onChange }) => 
   );
 };
 
-export const SelectFieldRegistration = ({ type, value, label, placeholder, onChange, name }) => {
+export const SelectFieldRegistration = ({ type, value, label, placeholder, onChange, onkeypress, name }) => {
   return (
     <>
       <Label>{label}</Label>
       <Input
         onChange={onChange}
+        onkeypress={onkeypress}
         value={value}
         type={type}
         placeholder={placeholder}

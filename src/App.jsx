@@ -22,8 +22,7 @@ import { IconContext } from 'react-icons/lib';
 import { Wrapper, Panel } from './assets/template.styles';
 
 const App = () => {
-  const [data, setData] = useState(localStorage.getItem('status'))
-  console.log(data)
+
   return(
     <IconContext.Provider value={{ className: 'react-icons' }}>
     <Router>
@@ -35,16 +34,12 @@ const App = () => {
           <Route exact path='/'>
             <Redirect to='/login' />
           </Route>
-          <Route path='/login' >
-            <Redirect to={data==='user'?'/userHome':'/login'} />
-            <LoginPanel /></Route>
+          <Route path='/login' ><LoginPanel /></Route>
           <Route path='/register'><LoginRegistration /></Route>
           <Route path='/passwordReset'><LoginPasswordReset /></Route>
           <Route path='/contact'><LoginContact /></Route>
           <Route path='/adminHome'><AdminHome /></Route>
-          <Route path='/adminMessage'>
-            <Redirect to={data==='admin'?'/adminHome':'/login'} />
-            <AdminMessage /></Route>
+          <Route path='/adminMessage'><AdminMessage /></Route>
           <Route path='/adminChangeUserStatus'><AdminChangeUserStatus /></Route>
           <Route path='/userHome'><UserHome /></Route>
           <Route path='/findYourCocktail'><FindYourCocktail /></Route>
@@ -60,6 +55,3 @@ const App = () => {
 }
 
 export default App;
-
-//FIXME: Zmienić Redirect by działał
-//TODO: Dowiedzieć się jak i dorobić zabezpieczcenia 

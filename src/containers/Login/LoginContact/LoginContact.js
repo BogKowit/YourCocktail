@@ -6,13 +6,9 @@ import { Field } from "../../../components/SelectField/SelectField";
 import { ErrorMessage } from "../../../assets/adds.styles";
 import { TopText } from "../../../components/Other/Other";
 import axios from "axios";
+import { emailRegex, phoneRegex } from "../../../utils/regex";
+import { messageForm } from "../../../utils/forms";
 
-const messageForm = {
-  name: "",
-  phone: "",
-  email: "",
-  text: "",
-};
 const reducerTypes = {
   inputChange: "INPUT CHANGE",
   clearValue: "CLEAR VALUE",
@@ -39,7 +35,7 @@ const reducer = (state, action) => {
 };
 
 const LoginContact = () => {
-  const [newMessage, dispatch] = useReducer(reducer, messageForm)
+  const [newMessage, dispatch] = useReducer(reducer, messageForm);
 
   const handleFormValue = (e) => {
     dispatch({
@@ -64,9 +60,12 @@ const LoginContact = () => {
       })
       .then(function (response) {
         console.log(response);
+        alert('The new message has been sent');
+        dispatch({ type: reducerTypes.clearValue });
       })
       .catch(function (error) {
         console.log(error);
+        alert('Your message is FAILED')
       });
   };
 
@@ -77,28 +76,15 @@ const LoginContact = () => {
     });
   };
   
+
   const validate = () => {
-    if (!newMessage.email) {
-      dispatchProps("E-mail is required");
-    } else if (
-      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(
-        newMessage.email
-      )
-    ) {
-      dispatchProps("Bad email");
-    } else if (!newMessage.name) {
-      dispatchProps("Bad First name is required");
-    } else if (newMessage.name.length < 3) {
-      dispatchProps("The name is too short");
-    } else if (!newMessage.phone){
-      dispatchProps("Telephone is required");
-      // } else if (/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/(newMessage.phone)) {
-      //   dispatchProps("wrong phone number");
-      } else {
-        return newMessageSend(),
-        dispatch({ type: reducerTypes.clearValue }),
-        alert('The new message has been sent');
-      };
+    if (!newMessage.email) return dispatchProps("E-mail is required");
+    if (!emailRegex.test(newMessage.email)) return dispatchProps("Bad email");
+    if (!newMessage.name) return dispatchProps("Bad First name is required");
+    if (newMessage.name.length < 3) return dispatchProps("The name is too short");
+    if (!newMessage.phone) return dispatchProps("Telephone is required");
+    if (!phoneRegex.test(newMessage.phone)) return dispatchProps('error')
+    return newMessageSend()
 }
   console.log(newMessage);
   return (
@@ -154,7 +140,5 @@ const LoginContact = () => {
 
 export default LoginContact;
 
-//FIXME:PHONE WALIDACJA
 
-//TODO: DODAĆ WIADOMOŚĆ ZOSTAŁA WYSŁANA
 //TODO: Zwiększyć height formularza
