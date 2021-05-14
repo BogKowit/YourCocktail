@@ -25,7 +25,6 @@ export const SelectFieldRegistration = ({ type, value, label, placeholder, onCha
       <Label>{label}</Label>
       <Input
         onChange={onChange}
-        onkeypress={onkeypress}
         value={value}
         type={type}
         placeholder={placeholder}

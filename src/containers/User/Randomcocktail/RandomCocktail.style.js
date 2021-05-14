@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const DrinkPicture = styled.img`
-  width: 200px;
+  width: 150px;
+  height: 150px;
   margin-top: 10px;
   border-radius: 10px;
   border: 1px solid grey;
@@ -19,7 +20,7 @@ export const WrapperIngredient = styled.div`
   justify-content: center;
   align-items: center;
   width: 120px;
-  height: 300px;
+  height: 240px;
   & > p {
     margin: 0;
     text-align: center;
@@ -45,7 +46,7 @@ export const HowToDo = styled.p`
 export const WrapperAllIngredients = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content:center;
+  justify-content: center;
 `;
 
 export const IngredientPhoto = styled.img`
@@ -55,4 +56,12 @@ export const IngredientPhoto = styled.img`
 export const DrinkName = styled.p`
   font-weight: bold;
   margin: 10px 0;
+`;
+export const Scroll = styled.ul`
+  overflow-y: scroll;
+  width: 100%;
+  height: 55%;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
 `;

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clientmsg",
+  "info": {
+    "name": "clientmsg",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "name": {
+      "type": "string"
+    },
+    "important": {
+      "type": "string"
+    }
+  }
+}

@@ -4,59 +4,8 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import axios from "axios";
 import styled from "styled-components";
 import { Welcome } from '../../../assets/Login.style';
-
-
-  const Messages = styled.ul`
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin: 0;
-    padding: 0;
-  `;
-  const SimpleMessage = styled.li`
-    font-size: 14px;
-    background-color: rgba(20, 88, 88, 0.3);
-    margin: 3px 0;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: 1px solid grey;
-    width: 100%;
-    min-width: 300px;
-    @media (max-width: 410px) {
-      min-width: 270px;}
-  `;
-
-  const WrapperMessage = styled.div`
-    display: grid;
-    grid-template-columns: 120px 1fr;
-
-    @media (max-width: 410px) {
-      display: flex;
-      flex-direction: column;
-      width: 250px;
-    }
-    > :first-child {
-      border-bottom: 1px solid black;
-      font-size: 16px;
-      font-weight: bold;
-      margin: 0;
-      @media (max-width: 410px) {
-        border-bottom: 1px solid grey;
-      }
-    }
-  `;
-
-  const Scroll = styled.div`
-    overflow-y: scroll;
-    width: 90%;
-    height: 90%;
-    margin: 10px;
-    background-color: rgba(20, 88, 88, 0.2);
-    padding: 15px;
-    border: 1px solid grey;
-    border-radius: 10px;
-  `;
+import { Redirect } from "react-router-dom";
+import {Messages,SimpleMessage,WrapperMessage,Scroll} from './AdminMessage.style'
 
 const AdminMessage = () => {
   const [message, setMessage] = useState([])
@@ -65,7 +14,6 @@ const AdminMessage = () => {
     axios
       .get("http://localhost:1337/clientmsgs")
       .then((response) => {
-        console.log(response);
         setMessage(response.data);
       })
       .catch((error) => {
@@ -77,10 +25,6 @@ const AdminMessage = () => {
   const handleDeleteMessage = (e, id) => {
     axios
       .delete(`http://localhost:1337/clientmsgs/${id}`)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      })
       .catch((err) => {
         console(err);
       });
@@ -88,6 +32,8 @@ const AdminMessage = () => {
     setMessage(newMessageList);
   };
 
+  if (localStorage.getItem("status") !== "admin")
+    return <Redirect to={"/userHome"} />;
   return (
     <>
       <Welcome>Messages</Welcome>
@@ -124,7 +70,7 @@ const AdminMessage = () => {
       </Scroll>
       <ButtonRounded
         icon={<TiArrowBackOutline />}
-        text="Powrót do panelu Logowania"
+        text="Admin"
         link="/adminHome"
       />
       </>

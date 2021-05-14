@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import Navigation from './components/Navigation/Navigation'
 //
 import LoginPanel from './containers/Login/LoginSelect/LoginSelect';
 import LoginRegistration from './containers/Login/Registration/LoginRegistration'
@@ -27,7 +26,6 @@ const App = () => {
     <IconContext.Provider value={{ className: 'react-icons' }}>
     <Router>
       <GlobalStyle />
-      <Navigation />
       <Wrapper>
         <Panel>
         <Switch>

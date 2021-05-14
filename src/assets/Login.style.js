@@ -1,12 +1,37 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const LinkTo = styled(Link)`
+// export const LinkTo = styled(Link)`
+//   text-decoration: none;
+//   color: rgba(255, 255, 255, 0.8);
+//   font-size: 12px;
+//   transition: all 0.3s ease-in-out;
+//   margin-left: 5px;
+//   &:hover,
+//   :focus {
+//     text-shadow: 4px 4px 6px #ffffff80;
+//     cursor: pointer;
+//     color: rgba(0, 0, 0, 0.6);
+//     outline: none;
+//   }
+// `;
+
+export const LinkWrapper = styled(Link)`
+  width: 200px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px 5px 10px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 12px;
+  font-size: 16px;
   transition: all 0.3s ease-in-out;
   margin-left: 5px;
+  margin-top: 10px;
+  color: white;
   &:hover,
   :focus {
     text-shadow: 4px 4px 6px #ffffff80;
@@ -16,30 +41,13 @@ export const LinkTo = styled(Link)`
   }
 `;
 
-export const LinkToMiddle = styled(LinkTo)`
-  text-align: center;
-`;
-
-export const LinkWrapper = styled.div`
-  background: rgba(255, 255, 255, 0.2);
-  padding: 5px 10px 5px 10px;
-  margin: 5px;
-  border-radius: 25px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const LinkWrapperFull =styled(LinkWrapper)`
-  width: 200px;
-  justify-content: center;
-`
-
 export const WrapperLoginPanel = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 15px;
+  @media (max-width: 460px) {
+    flex-direction:column
+  }
 `;
 
 export const Welcome = styled.p`

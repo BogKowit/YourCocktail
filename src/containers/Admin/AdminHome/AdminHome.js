@@ -1,34 +1,50 @@
 import React from 'react'
 import { Welcome } from '../../../assets/Login.style';
-import { ButtonRoundedFull } from '../../../components/RoundedButton/RoundedButton';
+import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import { Button } from '../../../assets/Buttons.styles';
 import { TiMessage } from 'react-icons/ti'
-import { RiExchangeDollarFill } from 'react-icons/ri'
-import { useHistory } from "react-router-dom";
+import { RiFindReplaceLine } from "react-icons/ri";
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import { FaCocktail } from "react-icons/fa";
+import { FiUserX } from "react-icons/fi"
+import { Redirect, useHistory } from "react-router-dom";
 
 const AdminHome = () => {
   let history = useHistory();
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("user");
+    localStorage.removeItem("status");
     history.push("/");
   };
+
+  if (localStorage.getItem('status')!=='admin') return <Redirect to={"/userHome"} />;
 
   return (
     <>
       <Welcome>Administration panel</Welcome>
-      <ButtonRoundedFull
-        icon={<TiMessage />}
-        text="Zapytania"
-        link="/adminMessage"
-      />
-      <ButtonRoundedFull
-        icon={<RiExchangeDollarFill />}
-        text="Zmiana statusu użykownika"
+      <ButtonRounded icon={<TiMessage />} text="Asks" link="/adminMessage" />
+      <ButtonRounded
+        icon={<FiUserX />}
+        text="Delete user"
         link="/adminChangeUserStatus"
       />
-      <Button onClick={(e) => handleLogout(e)}>Wyloguj</Button>
+      <ButtonRounded
+        icon={<RiFindReplaceLine />}
+        text="Find cocktail"
+        link="/findYourCocktail"
+      />
+      <ButtonRounded
+        icon={<GiPerspectiveDiceSixFacesRandom />}
+        text="Daily random cocktail"
+        link="/randomCocktail"
+      />
+      <ButtonRounded
+        icon={<FaCocktail />}
+        text=" Your best Cocktail"
+        link="/yourFavoriteCocktail"
+      />
+      <Button onClick={(e) => handleLogout(e)}>LogOut</Button>
     </>
   );
 }

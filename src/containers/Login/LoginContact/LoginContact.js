@@ -1,6 +1,5 @@
 import React, {useReducer} from "react";
 import { ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
-import { LoginContactText, Welcome } from "../../../assets/Login.style";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { Field } from "../../../components/SelectField/SelectField";
 import { ErrorMessage } from "../../../assets/adds.styles";
@@ -58,14 +57,13 @@ const LoginContact = () => {
         email: newMessage.email,
         name: newMessage.name,
       })
-      .then(function (response) {
-        console.log(response);
+      .then((response) => {
         alert('The new message has been sent');
         dispatch({ type: reducerTypes.clearValue });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
-        alert('Your message is FAILED')
+        alert("your message was not sent successfully");
       });
   };
 
@@ -75,7 +73,6 @@ const LoginContact = () => {
       errorValue: `${text}`,
     });
   };
-  
 
   const validate = () => {
     if (!newMessage.email) return dispatchProps("E-mail is required");
@@ -83,16 +80,18 @@ const LoginContact = () => {
     if (!newMessage.name) return dispatchProps("Bad First name is required");
     if (newMessage.name.length < 3) return dispatchProps("The name is too short");
     if (!newMessage.phone) return dispatchProps("Telephone is required");
-    if (!phoneRegex.test(newMessage.phone)) return dispatchProps('error')
+    if (!phoneRegex.test(newMessage.phone)) return dispatchProps('Wrong number')
+    if (newMessage.text.length < 12) return dispatchProps('The message is too short')
+
     return newMessageSend()
 }
-  console.log(newMessage);
+
   return (
     <>
-        <TopText text="Registration Panel" />
-        <LoginContactText>
-          Hello, if you have any questions. Fill in the form
-        </LoginContactText>
+        <TopText text="Contact Panel" />
+        <h4>
+          Hello, if you have any questions. Fill in the form.
+        </h4>
         <Field
           type="text"
           placeholder="Please enter your name"

@@ -13,7 +13,7 @@ const WrapperIngredients = ({ src, ingredient, measure }) => {
           {measure ? <p>proportions:</p> : null}
           <p>{measure}</p>
         </WrapperIngredient>
-         ) : null}
+        ) : null}
     </>
   );
 };

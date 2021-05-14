@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_statuses",
+  "info": {
+    "name": "UserStatus",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "condytion": {
+      "type": "string"
+    },
+    "birthdate": {
+      "type": "string"
+    }
+  }
+}

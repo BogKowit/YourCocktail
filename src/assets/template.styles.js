@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 export const Panel = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
   width: 90vw;
-  height: 80vh;
+  /* height: 80vh; */
   border-radius: 25px;
   box-shadow: 20px;
   display: flex;
@@ -21,18 +21,9 @@ export const Panel = styled.div`
   box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
   font-family: "Montserrat", sans-serif;
   color: white;
+  min-height: 300px;
+  max-height: 600px;
+  >:last-child{
+    margin-bottom: 15px;
+  }
 `;
-
-export const PanelLogin = styled(Panel)`
-  height: 370px;
-`
-export const PanelRegistration = styled(Panel)`
-  height: 450px;
-`;
-export const PanelResetPassword = styled(Panel)`
-  height: 370px;
-`;
-export const PanelContact = styled(Panel)`
-  height: 470px;
-`;
-//zmiana wielkości tabeli przy zmianie zakładki

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Welcome } from "../../../assets/Login.style";
-import {Panel, Wrapper} from '../../../assets/template.styles';
 import { Button } from "../../../assets/Buttons.styles"
-import { ButtonRoundedFull } from "../../../components/RoundedButton/RoundedButton";
-import { RiSurveyLine, RiTeamFill } from "react-icons/ri";
-import { MdAddAPhoto} from "react-icons/md"
-import { useHistory } from "react-router-dom";
+import { ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
+import { RiFindReplaceLine, } from "react-icons/ri";
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import { FaCocktail } from "react-icons/fa";
+import { Redirect, useHistory } from "react-router-dom";
 
 const Home = () => {
 let history = useHistory();
@@ -16,29 +16,27 @@ let history = useHistory();
       history.push("/");
   }
 
-  //TODO: Witaj zmienić na login użytkownika
-
+    if (localStorage.getItem('status')!=='user') return <Redirect to={'/'} />
+FaCocktail
   return (
     <>
-
-        <Welcome>Witaj użytkowniku</Welcome>
-        <ButtonRoundedFull
-          icon={<RiSurveyLine />}
-          text="Find Cocktail"
-          link="/findYourCocktail"
-        />
-        <ButtonRoundedFull
-          icon={<RiTeamFill />}
-          text="Daily random cocktail"
-          link="/randomCocktail"
-        />
-        <ButtonRoundedFull
-          icon={<MdAddAPhoto />}
-          text="Your best Cocktail"
-          link="/yourFavoriteCocktail"
-        />
-        <Button onClick={(e) => handleLogout(e)}>Wyloguj</Button>
-
+      <Welcome>Witaj użytkowniku</Welcome>
+      <ButtonRounded
+        icon={<RiFindReplaceLine />}
+        text="Find Cocktail"
+        link="/findYourCocktail"
+      />
+      <ButtonRounded
+        icon={<GiPerspectiveDiceSixFacesRandom />}
+        text="Daily random cocktail"
+        link="/randomCocktail"
+      />
+      <ButtonRounded
+        icon={<FaCocktail />}
+        text=" Your best Cocktail"
+        link="/yourFavoriteCocktail"
+      />
+      <Button onClick={(e) => handleLogout(e)}>LogOut</Button>
     </>
   );
 };

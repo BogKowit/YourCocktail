@@ -45,9 +45,10 @@ const LoginSelect = () => {
     }
     else setError("incorrect password or username");
   }
-  
+
   if (localStorage.getItem('status')==='user') return <Redirect to={'/userHome'} />
-            // <Redirect to={data==='admin'?'/adminHome':'/login'} />
+  if (localStorage.getItem('status')==='admin') return <Redirect to={'/adminHome'} />
+
   return (
     <>
       <TopText text="Hello User" />
@@ -66,11 +67,11 @@ const LoginSelect = () => {
       <ButtonClick text="Login" onClick={LoginVerification} />
       {error ? <ErrorMessage>{error}</ErrorMessage> : null}
       <WrapperLoginPanel>
-      <ButtonRounded
-        icon={<FiUserPlus />}
-        text="Register the user."
-        link="/register"
-      />
+        <ButtonRounded
+          icon={<FiUserPlus />}
+          text="Register the user."
+          link="/register"
+        />
         <ButtonRounded
           icon={<BsChatDots />}
           text="Contact with us!"

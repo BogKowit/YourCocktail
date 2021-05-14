@@ -1,8 +1,8 @@
 import React, {useState } from "react";
 import axios from "axios";
 import { Welcome } from "../../../assets/Login.style";
-import { DrinkPicture, WrapperIngredient, WhatACocktail, HowToDo,
-WrapperAllIngredients, IngredientPhoto, DrinkName} from './RandomCocktail.style'
+import { DrinkPicture, WhatACocktail, HowToDo,
+WrapperAllIngredients, DrinkName, Scroll} from './RandomCocktail.style'
 import { ButtonClick, ButtonRounded } from "../../../components/RoundedButton/RoundedButton";
 import WrapperIngredients from "./WrapperIngredients";
 
@@ -10,7 +10,7 @@ const Board = () => {
   const [cocktail, setCocktail] = useState([]);
   const [buttonText, setButtonText] = useState("Drink for today")
 
-  const getRandomDrink = async (name) => {
+  const getRandomDrink = async () => {
     handlerNameButton();
     await axios
       .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
@@ -35,7 +35,7 @@ const Board = () => {
       .put(`http://localhost:1337/dupas/${id}`, {
         favoriteDrink: idDrink,
       })
-      .then((response) => console.log(response))
+      .then(alert("Add to Favorite Cocktail"))
       .catch((error) => {
         console.log(error);
       });
@@ -46,59 +46,61 @@ const Board = () => {
   return (
     <>
       <Welcome>Your drink for today</Welcome>
+      <Scroll>
       {cocktail.strDrinkThumb ? (
         <DrinkPicture src={cocktail.strDrinkThumb} alt="Logo" />
       ) : (
         <WhatACocktail>?</WhatACocktail>
       )}
-      <Welcome>Name of the drink:</Welcome>
-      <DrinkName>{cocktail.strDrink}</DrinkName>
-      {cocktail.strDrink ? <Welcome>A method of preparing</Welcome> : null}
-      <HowToDo>{cocktail.strInstructions}</HowToDo>
-      <WrapperAllIngredients>
-        <WrapperIngredients
-          src={Ingredient1Photo}
-          ingredient={cocktail.strIngredient1}
-          measure={cocktail.strMeasure1}
-        />
-        <WrapperIngredients
-          src={Ingredient2Photo}
-          ingredient={cocktail.strIngredient2}
-          measure={cocktail.strMeasure2}
-        />
-        <WrapperIngredients
-          src={Ingredient3Photo}
-          ingredient={cocktail.strIngredient3}
-          measure={cocktail.strMeasure3}
-        />
-        <WrapperIngredients
-          src={Ingredient4Photo}
-          ingredient={cocktail.strIngredient4}
-          measure={cocktail.strMeasure4}
-        />
-        <WrapperIngredients
-          src={Ingredient5Photo}
-          ingredient={cocktail.strIngredient5}
-          measure={cocktail.strMeasure5}
-        />
-        <WrapperIngredients
-          src={Ingredient6Photo}
-          ingredient={cocktail.strIngredient6}
-          measure={cocktail.strMeasure6}
-        />
-        <WrapperIngredients
-          src={Ingredient7Photo}
-          ingredient={cocktail.strIngredient7}
-          measure={cocktail.strMeasure7}
-        />
-        <WrapperIngredients
-          src={Ingredient8Photo}
-          ingredient={cocktail.strIngredient8}
-          measure={cocktail.strMeasure8}
-        />
-      </WrapperAllIngredients>
-      <ButtonClick text='Add to favorite' onClick={addToFavorite} />
-      <ButtonClick text={buttonText} onClick={getRandomDrink} />
+        <Welcome>Name of the drink:</Welcome>
+        <DrinkName>{cocktail.strDrink}</DrinkName>
+        {cocktail.strDrink ? <Welcome>A method of preparing</Welcome> : null}
+        <HowToDo>{cocktail.strInstructions}</HowToDo>
+        <WrapperAllIngredients>
+          <WrapperIngredients
+            src={Ingredient1Photo}
+            ingredient={cocktail.strIngredient1}
+            measure={cocktail.strMeasure1}
+          />
+          <WrapperIngredients
+            src={Ingredient2Photo}
+            ingredient={cocktail.strIngredient2}
+            measure={cocktail.strMeasure2}
+          />
+          <WrapperIngredients
+            src={Ingredient3Photo}
+            ingredient={cocktail.strIngredient3}
+            measure={cocktail.strMeasure3}
+          />
+          <WrapperIngredients
+            src={Ingredient4Photo}
+            ingredient={cocktail.strIngredient4}
+            measure={cocktail.strMeasure4}
+          />
+          <WrapperIngredients
+            src={Ingredient5Photo}
+            ingredient={cocktail.strIngredient5}
+            measure={cocktail.strMeasure5}
+          />
+          <WrapperIngredients
+            src={Ingredient6Photo}
+            ingredient={cocktail.strIngredient6}
+            measure={cocktail.strMeasure6}
+          />
+          <WrapperIngredients
+            src={Ingredient7Photo}
+            ingredient={cocktail.strIngredient7}
+            measure={cocktail.strMeasure7}
+          />
+          <WrapperIngredients
+            src={Ingredient8Photo}
+            ingredient={cocktail.strIngredient8}
+            measure={cocktail.strMeasure8}
+          />
+        </WrapperAllIngredients>
+      </Scroll>
+      <ButtonClick text="Add to favorite" onClick={(e)=>{addToFavorite(e)}} />
+      <ButtonClick text={buttonText} onClick={(e) => {getRandomDrink(e)}} />
       <ButtonRounded text="Back to login panel" link="/UserHome" />
     </>
   );
