@@ -1,14 +1,26 @@
-npm i -D @babel/core @babel/plugin-proposal-class-properties @babel/preset-env @babel/preset-react babel-plugin-styled-components
+# Cocktail manager
+## ----- description ---
+The project shows the possibility of logging in using the login panel. After logging in, the user can find a cocktail by name or randomly select a daily drink.
 
-npm i -D webpack webpack-cli webpack-dev-server
+In the Project, we use the local database of "strapi". Internet API access to the drink database: https://www.thecocktaildb.com/api.php
+# Features
+ - random cocktail generator
+ - manage favorite cocktail
+ - RWD
 
-npm i -D pmmmwh/react-refresh-webpack-plugin  babel-loader clean-webpack-plugin css-loader html-webpack-plugin mini-css-extract-plugin sass-loader
+# To do:
+ - make error table
+ - make more than one favorite drink
+ - use Token's to login
 
-npm i react react-dom react-is react-router react-router-dom react-refresh
-npm i prop-types
+# Technology
+  - strapi
+  - axios
+  - styled-components
+  - webpack plugin: @pmmmwh/react-refresh-webpack-plugin
 
-npm i -D sass styled-components
-
-//sfokusować element a poprzez tab# UserDate
-//Zrobić wspólnee stlyle do panelu logowania
-//Ostylować border Panel, Boerder input
+# RUN project
+  RUN WEBPACK:
+  npm start
+  RUN STRAPI:
+  cd strapi, npm start

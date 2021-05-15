@@ -1,3 +1,9 @@
+/*
+  @autor Bogdan
+  @lastDate: 15.05.2021
+  @status: completed
+  @description: Login screen
+*/
 import React, { useState, useEffect} from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { WrapperLoginPanel } from "../../../assets/Login.style";

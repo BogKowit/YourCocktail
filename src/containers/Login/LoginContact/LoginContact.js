@@ -140,4 +140,3 @@ const LoginContact = () => {
 export default LoginContact;
 
 
-//TODO: Zwiększyć height formularza
