@@ -30,7 +30,7 @@ const App = () => {
         <Panel>
         <Switch>
           <Route exact path='/'>
-            <Redirect to='/login' />
+            <Redirect to='/userHome' />
           </Route>
           <Route path='/login' ><LoginPanel /></Route>
           <Route path='/register'><LoginRegistration /></Route>

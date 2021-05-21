@@ -16,8 +16,7 @@ let history = useHistory();
       history.push("/");
   }
 
-    if (localStorage.getItem('status')!=='user') return <Redirect to={'/'} />
-FaCocktail
+    // if (localStorage.getItem('status')!=='user') return <Redirect to={'/'} />
   return (
     <>
       <Welcome>Witaj użytkowniku</Welcome>
